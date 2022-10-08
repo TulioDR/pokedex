@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import threeDigits from "../utils/threeDigits";
 
 interface PokemonCard {
    name: string;
@@ -54,10 +55,7 @@ export default function Card({ pokemon, setSelectedId }: Props) {
          </motion.div>
          <div className="bg-gray-700 p-3 text-white flex flex-col space-y-1">
             <div className="text-gray-400 text-sm">
-               N.º
-               {pokemon.id.toLocaleString("en-US", {
-                  minimumIntegerDigits: 3,
-               })}
+               N.º{threeDigits(pokemon.id)}
             </div>
             <div className="capitalize">{name}</div>
             <div className="grid grid-cols-2 gap-3 text-white">

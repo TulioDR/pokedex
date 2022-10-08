@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Stats from "../components/Pokemon/Stats";
 
 type Props = {
    pokemon: any;
@@ -38,7 +39,32 @@ export default function Pokemon({ pokemon }: Props) {
                   layout="fill"
                   priority
                />
+               <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: "100%", transition: { duration: 0.5 } }}
+                  className="absolute w-full h-full top-0 left-0 bg-white overflow-hidden rounded-lg"
+               >
+                  <div className="absolute w-full h-full aspect-square top-0 left-0">
+                     <div className="w-full aspect-square relative origin-bottom">
+                        <Image
+                           src={
+                              pokemon.sprites.other["official-artwork"]
+                                 .front_default
+                           }
+                           layout="fill"
+                           priority
+                        />
+                     </div>
+                  </div>
+               </motion.div>
             </motion.div>
+            <div className="row-span-2 flex flex-col justify-between">
+               <div>Hello</div>
+               <div>Hello</div>
+               <div>Hello</div>
+               <div>Hello</div>
+            </div>
+            <Stats stats={pokemon.stats} />
          </div>
       </>
    );

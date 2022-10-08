@@ -86,9 +86,13 @@ const Home: NextPage = ({ pokemons }: any) => {
                            onClick={() => setSelectedId(null)}
                            layoutId={selectedId}
                            bg-white
-                           className="relative w-full aspect-square shadow-lg rounded-lg bg-white"
+                           className="relative w-full aspect-square shadow-lg rounded-lg"
                         >
-                           <Image src={selectedId} layout="fill" />
+                           <Image
+                              src={selectedId}
+                              layout="fill"
+                              className="bg-white"
+                           />
                         </motion.div>
                      </div>
                   </div>
