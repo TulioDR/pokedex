@@ -20,7 +20,7 @@ interface PokemonCard {
    id: number;
    types: {
       slot: number;
-      name: string;
+      type: { name: string };
    }[];
 }
 
@@ -42,12 +42,7 @@ const Home: NextPage = ({ pokemons }: any) => {
                name: name,
                img: sprites.front_default,
                id: id,
-               types: types.map((type: any) => {
-                  return {
-                     slot: type.slot,
-                     name: type.type.name,
-                  };
-               }),
+               types: types,
             });
          });
          setFilteredPokemons(newPokemons);
@@ -85,7 +80,6 @@ const Home: NextPage = ({ pokemons }: any) => {
                         <motion.div
                            onClick={() => setSelectedId(null)}
                            layoutId={selectedId}
-                           bg-white
                            className="relative w-full aspect-square shadow-lg rounded-lg"
                         >
                            <Image

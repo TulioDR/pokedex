@@ -9,13 +9,13 @@ interface PokemonCard {
    id: number;
    types: {
       slot: number;
-      name: string;
+      type: { name: string };
    }[];
 }
 
 type Props = {
    pokemon: PokemonCard;
-   setSelectedId: any;
+   setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export default function Card({ pokemon, setSelectedId }: Props) {
@@ -59,12 +59,12 @@ export default function Card({ pokemon, setSelectedId }: Props) {
             </div>
             <div className="capitalize">{name}</div>
             <div className="grid grid-cols-2 gap-3 text-white">
-               {pokemon.types.map(({ slot, name }) => (
+               {pokemon.types.map(({ slot, type }) => (
                   <div
                      key={slot}
                      className={`rounded-md capitalize text-center bg-orange-900 py-1`}
                   >
-                     {name}
+                     {type.name}
                   </div>
                ))}
             </div>

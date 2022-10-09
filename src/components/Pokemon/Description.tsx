@@ -1,16 +1,12 @@
-type Props = {};
+type Props = {
+   description: string;
+};
 
-export default function Description({}: Props) {
+export default function Description({ description }: Props) {
    return (
-      <div>
+      <div className="p-5 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg text-white">
          <h2 className="text-3xl">Description</h2>
-         <p className="text-lg my-1">
-            {
-               species.flavor_text_entries.filter(
-                  (pok) => pok.language.name === "en"
-               )[1].flavor_text
-            }
-         </p>
+         <p className="text-lg my-1">{description}</p>
       </div>
    );
 }
