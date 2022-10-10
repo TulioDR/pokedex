@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
+import { StatsModel } from "../../Model/PokemonModel";
+import SectionContainer from "./Section/SectionContainer";
 
 type Props = {
-   stats: {
-      base_stat: number;
-      stat: { name: string };
-   }[];
+   stats: StatsModel;
 };
 
 export default function Stats({ stats }: Props) {
    return (
-      <section className="bg-gray-600 rounded-lg p-5 shadow-lg">
+      <SectionContainer>
          <h1 className="text-white text-xl ml-4">Stats</h1>
          <div className="flex flex-col space-y-2">
             {stats.map((stat, index) => (
@@ -27,6 +26,6 @@ export default function Stats({ stats }: Props) {
                </div>
             ))}
          </div>
-      </section>
+      </SectionContainer>
    );
 }

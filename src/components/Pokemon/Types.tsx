@@ -1,14 +1,15 @@
+import { TypesModel } from "../../Model/PokemonModel";
+import SectionContainer from "./Section/SectionContainer";
+import SectionTitle from "./Section/SectionTitle";
+
 type Props = {
-   types: {
-      slot: number;
-      type: { name: string };
-   }[];
+   types: TypesModel;
 };
 
 export default function Types({ types }: Props) {
    return (
-      <section className=" bg-gray-600 rounded-md p-4 mt-3 md:mt-0">
-         <h2 className="text-xl mb-2 text-white">Type</h2>
+      <SectionContainer>
+         <SectionTitle>Type</SectionTitle>
          <div className="grid grid-cols-2 gap-2 text-white">
             {types.map((type) => (
                <div
@@ -19,6 +20,6 @@ export default function Types({ types }: Props) {
                </div>
             ))}
          </div>
-      </section>
+      </SectionContainer>
    );
 }

@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { ImageModel } from "../../Model/PokemonModel";
 
 type Props = {
-   img: string;
-   hdImg: string;
+   image: ImageModel;
 };
 
-export default function PokeImg({ img, hdImg }: Props) {
+export default function PokeImg({ image }: Props) {
    return (
       <div className="relative aspect-square bg-white rounded-lg shadow-lg">
-         <Image src={img} layout="fill" priority />
+         <Image src={image.smallImg} layout="fill" priority />
          <motion.div
             initial={{ height: 0 }}
             animate={{ height: "100%", transition: { duration: 0.5 } }}
@@ -17,7 +17,7 @@ export default function PokeImg({ img, hdImg }: Props) {
          >
             <div className="absolute w-full h-full aspect-square top-0 left-0">
                <div className="w-full aspect-square relative origin-bottom">
-                  <Image src={hdImg} layout="fill" priority />
+                  <Image src={image.hdImg} layout="fill" priority />
                </div>
             </div>
          </motion.div>

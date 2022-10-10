@@ -7,37 +7,12 @@ import Species from "../components/Pokemon/Species";
 
 import Container from "../components/Container";
 import Details from "../components/Pokemon/Details/Details";
+import PokemonModel from "../Model/PokemonModel";
+import Evolution from "../components/Pokemon/Evolution/Evolution";
 
 type Props = {
    pokemon: PokemonModel;
 };
-interface PokemonModel {
-   name: string;
-   img: string;
-   hdImg: string;
-   types: {
-      slot: number;
-      type: { name: string };
-   }[];
-   stats: {
-      base_stat: number;
-      stat: { name: string };
-   }[];
-   description: string;
-   properties: {
-      height: number;
-      weight: number;
-      gender: number;
-      generation: string;
-      abilities: {
-         name: string;
-         description: string;
-      };
-   };
-   mainData: any;
-   species: any;
-   evolution: any;
-}
 
 const getData = async (url: string) => {
    const res = await fetch(url);
@@ -65,22 +40,23 @@ export async function getServerSideProps({ query }: any) {
    const evolution = await getData(species.evolution_chain.url);
    const pokemon: PokemonModel = {
       name: mainData.name,
-      img: mainData.sprites.front_default,
-      hdImg: mainData.sprites.other["official-artwork"].front_default,
+      image: {
+         smallImg: mainData.sprites.front_default,
+         hdImg: mainData.sprites.other["official-artwork"].front_default,
+      },
       stats: mainData.stats,
       types: mainData.types,
       description: species.flavor_text_entries.filter(
          (pok: any) => pok.language.name === "en"
       )[0].flavor_text,
-      properties: {
+      details: {
          height: mainData.height,
          weight: mainData.weight,
          gender: species.gender_rate,
          generation: species.generation.name.substring(11).toUpperCase(),
          abilities: await getAbilities(mainData.abilities),
       },
-      mainData: mainData,
-      species: species,
+      species: species.egg_groups,
       evolution: evolution,
    };
    return {
@@ -89,7 +65,7 @@ export async function getServerSideProps({ query }: any) {
 }
 
 export default function Pokemon({ pokemon }: Props) {
-   console.log(pokemon);
+   console.log(pokemon.species);
    return (
       <>
          <Head>
@@ -100,16 +76,16 @@ export default function Pokemon({ pokemon }: Props) {
          <Container>
             <div className="bg-gray-200 p-7 space-y-7">
                <div className="grid sm:grid-cols-2 gap-5 w-full">
-                  <PokeImg img={pokemon.img} hdImg={pokemon.hdImg} />
+                  <PokeImg image={pokemon.image} />
                   <div className="row-span-2 flex flex-col space-y-5">
                      <Description description={pokemon.description} />
-                     <Details properties={pokemon.properties} />
+                     <Details details={pokemon.details} />
                      <Types types={pokemon.types} />
                      <Species species={pokemon.species} />
                   </div>
                   <Stats stats={pokemon.stats} />
                </div>
-               <div className="w-full h-96 rounded-lg bg-gray-700 shadow-lg"></div>
+               <Evolution />
             </div>
          </Container>
       </>

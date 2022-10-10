@@ -1,23 +1,16 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { DetailsModel } from "../../../Model/PokemonModel";
+import SectionContainer from "../Section/SectionContainer";
 import Ability from "./Ability";
 import Detail from "./Detail";
 
 type Props = {
-   properties: {
-      height: number;
-      weight: number;
-      gender: number;
-      generation: string;
-      abilities: {
-         name: string;
-         description: string;
-      };
-   };
+   details: DetailsModel;
 };
 
-export default function Details({ properties }: Props) {
-   const { height, weight, gender, generation, abilities } = properties;
+export default function Details({ details }: Props) {
+   const { height, weight, gender, generation, abilities } = details;
 
    const [abilitiesInfo, setAbilitiesInfo] = useState<any>(null);
 
@@ -51,20 +44,26 @@ export default function Details({ properties }: Props) {
 
    useEffect(() => {}, []);
    return (
-      <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-lg text-white overflow-hidden p-4 grid grid-cols-2 gap-3 relative">
-         <Detail label="Height" info={`${height / 10}m`} />
-         <Detail label="Weight" info={`${weight / 10}Kg`} />
-         <Detail label="Specie's Gender" info={getGender(gender)} />
-         <Detail label="Abilities" info={getAbilities(abilities)} abilities />
-         <Detail label="Generation" info={generation} />
-         <AnimatePresence>
-            {abilitiesInfo && (
-               <Ability
-                  ability={abilitiesInfo}
-                  setAbilitiesInfo={setAbilitiesInfo}
-               />
-            )}
-         </AnimatePresence>
-      </div>
+      <SectionContainer details>
+         <div className="grid grid-cols-2 gap-3 relative">
+            <Detail label="Height" info={`${height / 10}m`} />
+            <Detail label="Weight" info={`${weight / 10}Kg`} />
+            <Detail label="Specie's Gender" info={getGender(gender)} />
+            <Detail
+               label="Abilities"
+               info={getAbilities(abilities)}
+               abilities
+            />
+            <Detail label="Generation" info={generation} />
+            <AnimatePresence>
+               {abilitiesInfo && (
+                  <Ability
+                     ability={abilitiesInfo}
+                     setAbilitiesInfo={setAbilitiesInfo}
+                  />
+               )}
+            </AnimatePresence>
+         </div>
+      </SectionContainer>
    );
 }
