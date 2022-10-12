@@ -32,6 +32,24 @@ const getAbilities = async (abilities: any) => {
    }
    return await newArray;
 };
+const getID = (str: string) => str.substring(42).slice(0, -1);
+const getEvolutionChain = async (data: any) => {
+   let array = [];
+   const names = [getID(data.species.url)];
+   if (data.evolves_to[0]) {
+      names.push(getID(data.evolves_to[0].species.url));
+      if (data.evolves_to[0].evolves_to[0]) {
+         names.push(getID(data.evolves_to[0].evolves_to[0].species.url));
+      }
+   }
+   for (const id of names) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
+      const data = await getData(url);
+      // aqui debo meter los valores como en las cartas de index
+      array.push(data);
+   }
+   return array;
+};
 
 export async function getServerSideProps({ query }: any) {
    const mainLink = `https://pokeapi.co/api/v2/pokemon/${query.pokemon}`;
@@ -57,7 +75,7 @@ export async function getServerSideProps({ query }: any) {
          abilities: await getAbilities(mainData.abilities),
       },
       species: species.egg_groups,
-      evolution: evolution,
+      evolution: await getEvolutionChain(evolution.chain),
    };
    return {
       props: { pokemon },
@@ -65,7 +83,7 @@ export async function getServerSideProps({ query }: any) {
 }
 
 export default function Pokemon({ pokemon }: Props) {
-   console.log(pokemon.species);
+   // console.log(pokemon.evolution);
    return (
       <>
          <Head>
@@ -74,7 +92,7 @@ export default function Pokemon({ pokemon }: Props) {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <Container>
-            <div className="bg-gray-200 p-7 space-y-7">
+            <div className="bg-gray-200 p-5 sm:p-7">
                <div className="grid sm:grid-cols-2 gap-5 w-full">
                   <PokeImg image={pokemon.image} />
                   <div className="row-span-2 flex flex-col space-y-5">
@@ -84,8 +102,10 @@ export default function Pokemon({ pokemon }: Props) {
                      <Species species={pokemon.species} />
                   </div>
                   <Stats stats={pokemon.stats} />
+                  <div className="sm:col-span-2">
+                     <Evolution evolution={pokemon.evolution} />
+                  </div>
                </div>
-               <Evolution />
             </div>
          </Container>
       </>

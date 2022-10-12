@@ -12,7 +12,7 @@ export default function Stats({ stats }: Props) {
          <h1 className="text-white text-xl ml-4">Stats</h1>
          <div className="flex flex-col space-y-2">
             {stats.map((stat, index) => (
-               <div className="flex space-x-3" key={index}>
+               <div className="flex space-x-5" key={index}>
                   <div className="w-1/5 text-xs h-9 text-white flex text-center justify-center items-center">
                      {stat.stat.name}
                   </div>

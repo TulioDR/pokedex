@@ -15,7 +15,7 @@ export default function Ability({ ability, setAbilitiesInfo }: Props) {
          animate={{ y: 0 }}
          exit={{ y: "100%" }}
          transition={{ duration: 0.3 }}
-         className="absolute w-full h-full bg-gray-700 p-5"
+         className="absolute w-full h-full top-0 left-0 bg-gray-700 p-5"
       >
          <button
             onClick={() => setAbilitiesInfo(null)}

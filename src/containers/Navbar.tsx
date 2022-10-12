@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Container from "../components/Container";
 
 type Props = {};
 
@@ -15,10 +16,16 @@ export default function Navbar({}: Props) {
       router.push("/");
    };
    return (
-      <div className="mx-auto w-full bg-gray-700 h-16 text-white sticky top-0 z-10">
-         <div className="w-full sm:w-4/5 xl:w-2/3 mx-auto h-full flex items-center">
-            {showTitle ? "Pokedex" : <button onClick={goBack}>Go back</button>}
-         </div>
+      <div className="w-full bg-primary text-white sticky top-0 z-30">
+         <Container>
+            <div className="w-full h-16 flex items-center">
+               {showTitle ? (
+                  "Pokedex"
+               ) : (
+                  <button onClick={goBack}>Go back</button>
+               )}
+            </div>
+         </Container>
       </div>
    );
 }

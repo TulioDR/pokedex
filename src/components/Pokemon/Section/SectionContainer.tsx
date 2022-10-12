@@ -17,7 +17,7 @@ export default function SectionContainer({
       let gradient: string = "";
       if (details) gradient = "from-blue-500 to-blue-800";
       else if (species) gradient = "from-orange-600 to-orange-800";
-      else gradient = "from-gray-800 to-gray-900";
+      else gradient = "from-primary to-primary";
       setBackground(gradient);
    }, []);
 

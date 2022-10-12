@@ -45,7 +45,7 @@ export default function Details({ details }: Props) {
    useEffect(() => {}, []);
    return (
       <SectionContainer details>
-         <div className="grid grid-cols-2 gap-3 relative">
+         <div className="grid grid-cols-2 gap-3">
             <Detail label="Height" info={`${height / 10}m`} />
             <Detail label="Weight" info={`${weight / 10}Kg`} />
             <Detail label="Specie's Gender" info={getGender(gender)} />

@@ -22,6 +22,16 @@ export type DetailsModel = {
 };
 export type SpeciesModel = { name: string }[];
 
+export interface PokemonCardModel {
+   name: string;
+   img: string;
+   id: number;
+   types: {
+      slot: number;
+      type: { name: string };
+   }[];
+}
+
 export default interface PokemonModel {
    name: string;
    image: ImageModel;
@@ -30,5 +40,5 @@ export default interface PokemonModel {
    description: string;
    details: DetailsModel;
    species: SpeciesModel;
-   evolution: any;
+   evolution: PokemonCardModel[];
 }
