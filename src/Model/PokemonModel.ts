@@ -2,10 +2,7 @@ export type ImageModel = {
    smallImg: string;
    hdImg: string;
 };
-export type TypesModel = {
-   slot: number;
-   type: { name: string };
-}[];
+
 export type StatsModel = {
    base_stat: number;
    stat: { name: string };
@@ -20,6 +17,10 @@ export type DetailsModel = {
       description: string;
    };
 };
+export type TypesModel = {
+   slot: number;
+   type: { name: string };
+}[];
 export type SpeciesModel = { name: string }[];
 
 export interface PokemonCardModel {

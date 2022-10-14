@@ -9,7 +9,7 @@ export default function Description({ description }: Props) {
    return (
       <SectionContainer>
          <SectionTitle>Description</SectionTitle>
-         <p className="text-lg my-1">{description}</p>
+         <p className="text-lg">{description}</p>
       </SectionContainer>
    );
 }

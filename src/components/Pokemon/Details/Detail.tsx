@@ -7,8 +7,8 @@ type Props = {
 export default function Detail({ label, info, abilities }: Props) {
    return (
       <div className={`${abilities ? "row-span-2" : ""}`}>
-         <div className="text-white capitalize">{label}</div>
-         <div className="text-black">{info}</div>
+         <div className="text-white capitalize truncate">{label}</div>
+         <div className="text-black truncate">{info}</div>
       </div>
    );
 }
