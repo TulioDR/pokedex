@@ -3,22 +3,14 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import Card from "../containers/Card";
 
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
 import { PokemonCardModel } from "../Model/PokemonModel";
-import Container from "../components/Container";
 import useAnimationContext from "../context/AnimationContext";
 import SelectedImage from "../components/SelectedImage";
+import usePokemonsContext from "../context/PokemonsContext";
 
-export async function getServerSideProps() {
-   const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=898");
-   const data = await res.json();
-   return {
-      props: { pokemons: data.results },
-   };
-}
-
-const Home: NextPage = ({ pokemons }: any) => {
+const Home: NextPage = ({}: any) => {
+   const { allPokemons } = usePokemonsContext();
    const [filteredPokemons, setFilteredPokemons] = useState<PokemonCardModel[]>(
       []
    );
@@ -27,7 +19,7 @@ const Home: NextPage = ({ pokemons }: any) => {
 
    useEffect(() => {
       const doThis = async () => {
-         const pokemonsArray = pokemons.slice(0, 20);
+         const pokemonsArray = allPokemons.slice(0, 20);
          const requestPromises = pokemonsArray.map(async (pokemon: any) => {
             const res = await fetch(pokemon.url);
             return await res.json();
@@ -47,7 +39,7 @@ const Home: NextPage = ({ pokemons }: any) => {
          setFilteredPokemons(newPokemons);
       };
       doThis();
-   }, [pokemons]);
+   }, [allPokemons]);
 
    return (
       <>
