@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getPokemonsCards } from "../utils/getPokemonsCards";
+import orderPokemons from "../utils/orderPokemons";
 
 interface AppContextInterface {
    allPokemons: any[];
@@ -19,6 +21,7 @@ export default function usePokemonsContext() {
 
 export function PokemonsProvider({ children }: Props) {
    const [allPokemons, setAllPokemons] = useState<any[]>([]);
+   const [sourceFirstLast, setSourceFirstLast] = useState<any[]>([]);
    const [displayedSource, setDisplayedSource] = useState<any[]>([]);
    const [displayed, setDisplayed] = useState<any[]>([]);
    const [pageCount, setPageCount] = useState<number>(0);
@@ -35,6 +38,7 @@ export function PokemonsProvider({ children }: Props) {
          console.log("all pokemons obtained");
          setAllPokemons(data.results);
          setDisplayedSource(data.results);
+         setSourceFirstLast(data.results);
       };
       getAllPokemons();
    }, []);
@@ -50,6 +54,16 @@ export function PokemonsProvider({ children }: Props) {
       };
       displayPokemons();
    }, [displayedSource, pageCount]);
+
+   const router = useRouter();
+   useEffect(() => {
+      const orderedPokemons = orderPokemons(
+         sourceFirstLast,
+         router.query.order as string
+      );
+      setDisplayedSource(orderedPokemons);
+      setPageCount(0);
+   }, [router.query.order, sourceFirstLast]);
 
    const value: AppContextInterface = {
       allPokemons,

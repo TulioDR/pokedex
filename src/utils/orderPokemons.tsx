@@ -17,7 +17,8 @@ export default function orderPokemons(sourceArray: any[], order: string) {
    if (order === "z-a") {
       return orderAZ([...sourceArray]).reverse();
    }
-   if (order === "last-to-first") {
+   if (order === "last-first") {
+      console.log("last to first");
       return [...sourceArray].reverse();
    }
    return [...sourceArray];

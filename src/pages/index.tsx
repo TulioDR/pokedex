@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
 import Card from "../containers/Card";
 
 import { AnimatePresence } from "framer-motion";
@@ -9,7 +8,6 @@ import SelectedImage from "../components/SelectedImage";
 import usePokemonsContext from "../context/PokemonsContext";
 import Select from "../components/Select/Select";
 import ShuffleBtn from "../components/ShuffleBtn";
-import { useRouter } from "next/router";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 import Loading from "../components/Loading";
 
@@ -17,11 +15,6 @@ const Home: NextPage = ({}: any) => {
    const { displayed } = usePokemonsContext();
 
    const { selectedId, setSelectedId } = useAnimationContext();
-
-   const router = useRouter();
-   useEffect(() => {
-      console.log(router.query.order);
-   }, [router.query.order]);
 
    return (
       <>
