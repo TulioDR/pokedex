@@ -10,7 +10,7 @@ export default function Title({ children }: Props) {
          <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
-            // exit={{ y: "100%" }}
+            exit={{ y: "100%" }}
             transition={{ duration: 0.6 }}
             className="text-center font-semibold capitalize text-5xl mb-2"
          >

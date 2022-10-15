@@ -1,45 +1,27 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Card from "../containers/Card";
 
 import { AnimatePresence } from "framer-motion";
-import { PokemonCardModel } from "../Model/PokemonModel";
 import useAnimationContext from "../context/AnimationContext";
 import SelectedImage from "../components/SelectedImage";
 import usePokemonsContext from "../context/PokemonsContext";
+import Select from "../components/Select/Select";
+import ShuffleBtn from "../components/ShuffleBtn";
+import { useRouter } from "next/router";
+import LoadMoreBtn from "../components/LoadMoreBtn";
+import Loading from "../components/Loading";
 
 const Home: NextPage = ({}: any) => {
-   const { allPokemons } = usePokemonsContext();
-   const [filteredPokemons, setFilteredPokemons] = useState<PokemonCardModel[]>(
-      []
-   );
+   const { displayed } = usePokemonsContext();
 
    const { selectedId, setSelectedId } = useAnimationContext();
 
+   const router = useRouter();
    useEffect(() => {
-      const doThis = async () => {
-         const pokemonsArray = allPokemons.slice(0, 20);
-         const requestPromises = pokemonsArray.map(async (pokemon: any) => {
-            const res = await fetch(pokemon.url);
-            return await res.json();
-         });
-         const newData = await Promise.all(requestPromises);
-         let newPokemons: PokemonCardModel[] = [];
-         newData.map((poke: any) => {
-            const { name, sprites, id, types } = poke;
-            newPokemons.push({
-               name: name,
-               img: sprites.other["official-artwork"].front_default,
-               // img: sprites.front_default,
-               id: id,
-               types: types,
-            });
-         });
-         setFilteredPokemons(newPokemons);
-      };
-      doThis();
-   }, [allPokemons]);
+      console.log(router.query.order);
+   }, [router.query.order]);
 
    return (
       <>
@@ -50,12 +32,12 @@ const Home: NextPage = ({}: any) => {
          </Head>
          <div className="w-full">
             <div className="md:flex space-y-5 md:space-y-0 space-x-0 md:space-x-7 pb-5 md:pb-7">
-               <div className="w-full h-10 bg-blue-500"></div>
-               <div className="w-full h-10 bg-primary"></div>
+               <ShuffleBtn />
+               <Select />
             </div>
 
             <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7 min-h-screen">
-               {filteredPokemons.map((pokemon) => (
+               {displayed.map((pokemon) => (
                   <Card
                      setSelectedId={setSelectedId}
                      pokemon={pokemon}
@@ -63,6 +45,10 @@ const Home: NextPage = ({}: any) => {
                   />
                ))}
             </div>
+
+            <LoadMoreBtn />
+            {/* <Loading /> */}
+
             <AnimatePresence>
                {selectedId && (
                   <SelectedImage

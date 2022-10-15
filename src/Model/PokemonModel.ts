@@ -24,9 +24,9 @@ export type TypesModel = {
 export type SpeciesModel = { name: string }[];
 
 export interface PokemonCardModel {
+   id: number;
    name: string;
    img: string;
-   id: number;
    types: {
       slot: number;
       type: { name: string };
