@@ -24,7 +24,7 @@ const Home: NextPage = ({}: any) => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <div className="w-full">
-            <div className="md:flex space-y-5 md:space-y-0 space-x-0 md:space-x-7 pb-5 md:pb-7">
+            <div className="grid grid-cols-2 gap-7 mb-7">
                <ShuffleBtn />
                <Select />
             </div>

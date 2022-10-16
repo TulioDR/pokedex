@@ -5,7 +5,7 @@ type Props = {};
 export default function ShuffleBtn({}: Props) {
    const router = useRouter();
    const changeSearchType = () => {
-      router.push({ query: { order: "random" } });
+      router.push({ query: { ...router.query, order: "random" } });
    };
 
    return (

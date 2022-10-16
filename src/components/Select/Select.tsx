@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SelectOption from "./SelectOption";
 
 type Props = {};
@@ -20,16 +20,27 @@ export default function Select({}: Props) {
       else setSelected("First to Last");
    }, [router.query.order]);
 
+   const optionsContainer = useRef<HTMLUListElement>(null);
+   const handleBlur = (e: any) => {
+      if (e.relatedTarget !== optionsContainer.current) setIsOpen(false);
+   };
+
    return (
-      <div className="w-full text-white relative z-10">
-         <button
-            onClick={toggle}
-            className="w-full h-10 bg-primary rounded-lg flex items-center pl-4 cursor-pointer"
-         >
+      <div
+         tabIndex={0}
+         onBlur={handleBlur}
+         onClick={toggle}
+         className="w-full text-white relative z-10"
+      >
+         <button className="w-full h-10 bg-primary rounded-lg flex items-center pl-4 cursor-pointer">
             {selected}
          </button>
          {isOpen && (
-            <ul className="w-full rounded-lg bg-primary mt-2 absolute top-full shadow-lg pb-3">
+            <ul
+               tabIndex={0}
+               ref={optionsContainer}
+               className="w-full rounded-lg bg-primary mt-2 absolute top-full shadow-lg pb-3"
+            >
                <div className="w-full h-8 flex items-center px-5 text-sm text-gray-300">
                   Sort pokémons by...
                </div>

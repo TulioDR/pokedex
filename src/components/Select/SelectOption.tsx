@@ -10,7 +10,7 @@ export default function SelectOption({ children, order }: Props) {
    const router = useRouter();
 
    const changeSearchType = () => {
-      router.push({ query: { order: order } });
+      router.push({ query: { ...router.query, order: order } });
    };
    return (
       <li

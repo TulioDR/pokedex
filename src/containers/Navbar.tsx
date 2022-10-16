@@ -19,11 +19,13 @@ export default function Navbar({}: Props) {
    return (
       <div className="w-full bg-primary text-white sticky top-0 z-30">
          <Container>
-            <div className="w-full h-16 flex items-center justify-between px-7 text-2xl">
+            <div className="w-full grid grid-cols-2 gap-7 px-7 py-3">
                {showTitle ? (
-                  <div>Pokedex</div>
+                  <div className="text-2xl">Pokedex</div>
                ) : (
-                  <button onClick={goBack}>Go back</button>
+                  <div className="text-2xl" onClick={goBack}>
+                     Go back
+                  </div>
                )}
                <SearchBar />
             </div>

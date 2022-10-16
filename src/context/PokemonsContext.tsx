@@ -56,6 +56,23 @@ export function PokemonsProvider({ children }: Props) {
    }, [displayedSource, pageCount]);
 
    const router = useRouter();
+
+   const filterPokemons = (allPokemons: any[], value: string) => {
+      return allPokemons.filter((pokemon) => {
+         return pokemon.name.includes(value.toLowerCase());
+      });
+   };
+   useEffect(() => {
+      if (router.query.search) {
+         const foundedPokemons = filterPokemons(
+            allPokemons,
+            router.query.search as string
+         );
+         setSourceFirstLast(foundedPokemons);
+         setPageCount(0);
+      }
+   }, [router.query.search, allPokemons]);
+
    useEffect(() => {
       const orderedPokemons = orderPokemons(
          sourceFirstLast,
