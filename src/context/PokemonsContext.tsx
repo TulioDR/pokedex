@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
+import filterByName from "../utils/filterByName";
 import { getPokemonsCards } from "../utils/getPokemonsCards";
 import orderPokemons from "../utils/orderPokemons";
 
@@ -58,14 +59,9 @@ export function PokemonsProvider({ children }: Props) {
 
    const router = useRouter();
 
-   const filterPokemons = (allPokemons: any[], value: string) => {
-      return allPokemons.filter((pokemon) => {
-         return pokemon.name.includes(value.toLowerCase());
-      });
-   };
    useEffect(() => {
       if (router.query.search) {
-         const foundedPokemons = filterPokemons(
+         const foundedPokemons = filterByName(
             allPokemons,
             router.query.search as string
          );
