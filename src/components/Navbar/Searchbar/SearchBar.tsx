@@ -10,6 +10,7 @@ export default function SearchBar({}: Props) {
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const [inputValue, setInputValue] = useState<string>("");
    const [foundedPokemons, setFoundedPokemons] = useState<any[]>([]);
+
    const toggle = () => {
       router.push({ query: { ...router.query, search: inputValue } });
       setIsOpen(false);
@@ -26,7 +27,7 @@ export default function SearchBar({}: Props) {
       if (inputValue) setIsOpen(true);
    };
    const handleInputBlur = (e: any) => {
-      // if (e.relatedTarget !== foundedContainer.current) setIsOpen(false);
+      if (e.relatedTarget !== foundedContainer.current) setIsOpen(false);
    };
 
    const handleInputChange = (e: any) => {
@@ -49,9 +50,15 @@ export default function SearchBar({}: Props) {
       setIsOpen(false);
    };
 
+   const handleSubmit = (e: any) => {
+      e.preventDefault();
+      router.push({ query: { ...router.query, search: inputValue } });
+      setIsOpen(false);
+   };
+
    return (
       <div className="h-10 w-full flex relative">
-         <div className="flex space-x-3 w-full">
+         <form onSubmit={handleSubmit} className="flex space-x-3 w-full">
             <div className="flex-1">
                <input
                   type="text"
@@ -68,9 +75,11 @@ export default function SearchBar({}: Props) {
             >
                <span className="material-icons">search</span>
             </button>
-         </div>
+         </form>
+
          {isOpen && (
             <ul
+               tabIndex={0}
                ref={foundedContainer}
                className="absolute w-full top-full left-0 bg-white max-h-96 overflow-y-auto rounded-lg shadow-lg mt-2"
             >

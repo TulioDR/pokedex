@@ -8,6 +8,7 @@ interface AppContextInterface {
    setPageCount: React.Dispatch<React.SetStateAction<number>>;
    nextPage: () => void;
    displayed: any[];
+   getRandomPokemons: () => void;
 }
 
 type Props = {
@@ -82,11 +83,19 @@ export function PokemonsProvider({ children }: Props) {
       setPageCount(0);
    }, [router.query.order, sourceFirstLast]);
 
+   const getRandomPokemons = () => {
+      const random = [...allPokemons].sort(() => Math.random() - 0.5);
+      setSourceFirstLast(allPokemons);
+      setDisplayedSource(random);
+      router.push({ query: {} });
+   };
+
    const value: AppContextInterface = {
       allPokemons,
       setPageCount,
       nextPage,
       displayed,
+      getRandomPokemons,
    };
 
    return (

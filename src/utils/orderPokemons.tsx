@@ -8,9 +8,6 @@ const orderAZ = (array: any[]) => {
 };
 
 export default function orderPokemons(sourceArray: any[], order: string) {
-   if (order === "random") {
-      return [...sourceArray].sort(() => Math.random() - 0.5);
-   }
    if (order === "a-z") {
       return orderAZ([...sourceArray]);
    }

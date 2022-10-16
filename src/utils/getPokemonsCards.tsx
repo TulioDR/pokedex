@@ -15,8 +15,8 @@ export const getPokemonsCards = async (sourceArray: any[], count: number) => {
       PokemonCards.push({
          id: id,
          name: name,
-         img: sprites.other["official-artwork"].front_default,
-         // img: sprites.front_default,
+         // img: sprites.other["official-artwork"].front_default,
+         img: sprites.front_default,
          types: types,
       });
    });
