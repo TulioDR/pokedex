@@ -41,5 +41,5 @@ export default interface PokemonModel {
    description: string;
    details: DetailsModel;
    species: SpeciesModel;
-   evolution: PokemonCardModel[];
+   evolution: PokemonCardModel[] | null;
 }

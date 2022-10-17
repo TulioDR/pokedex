@@ -19,7 +19,11 @@ const getAbilities = async (abilities: any) => {
    return await newArray;
 };
 const getID = (str: string) => str.substring(42).slice(0, -1);
-const getEvolutionChain = async (data: any) => {
+
+const getEvolutionChain = async (evolutionChain: any) => {
+   if (!evolutionChain) return null;
+   const evolution = await getData(evolutionChain.url);
+   const data = evolution.chain;
    let array = [];
    const names = [getID(data.species.url)];
    if (data.evolves_to[0]) {
@@ -39,7 +43,7 @@ const getEvolutionChain = async (data: any) => {
 
 export async function getPokemonData(mainData: any) {
    const species = await getData(mainData.species.url);
-   const evolution = await getData(species.evolution_chain.url);
+   const evolution = await getEvolutionChain(species.evolution_chain);
    const pokemon: PokemonModel = {
       name: mainData.name,
       image: {
@@ -59,7 +63,7 @@ export async function getPokemonData(mainData: any) {
          abilities: await getAbilities(mainData.abilities),
       },
       species: species.egg_groups,
-      evolution: await getEvolutionChain(evolution.chain),
+      evolution: evolution,
    };
    return { pokemon };
 }

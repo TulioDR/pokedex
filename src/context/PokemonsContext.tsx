@@ -34,7 +34,7 @@ export function PokemonsProvider({ children }: Props) {
 
    useEffect(() => {
       const getAllPokemons = async () => {
-         const url = "https://pokeapi.co/api/v2/pokemon?limit=898";
+         const url = "https://pokeapi.co/api/v2/pokemon?limit=905";
          const res = await fetch(url);
          const data = await res.json();
          console.log("all pokemons obtained");
@@ -48,6 +48,7 @@ export function PokemonsProvider({ children }: Props) {
    useEffect(() => {
       const displayPokemons = async () => {
          const cards = await getPokemonsCards(displayedSource, pageCount);
+         // console.log(cards);
          if (pageCount === 0) {
             setDisplayed(cards);
          } else {
@@ -60,14 +61,12 @@ export function PokemonsProvider({ children }: Props) {
    const router = useRouter();
 
    useEffect(() => {
-      if (router.query.search) {
-         const foundedPokemons = filterByName(
-            allPokemons,
-            router.query.search as string
-         );
-         setSourceFirstLast(foundedPokemons);
-         setPageCount(0);
-      }
+      const foundedPokemons = filterByName(
+         allPokemons,
+         router.query.search as string
+      );
+      setSourceFirstLast(foundedPokemons);
+      setPageCount(0);
    }, [router.query.search, allPokemons]);
 
    useEffect(() => {
@@ -83,6 +82,7 @@ export function PokemonsProvider({ children }: Props) {
       const random = [...allPokemons].sort(() => Math.random() - 0.5);
       setSourceFirstLast(allPokemons);
       setDisplayedSource(random);
+      setPageCount(0);
       router.push({ query: {} });
    };
 
