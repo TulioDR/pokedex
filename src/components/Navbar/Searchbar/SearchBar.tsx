@@ -21,12 +21,12 @@ export default function SearchBar({}: Props) {
    const handleInputFocus = () => {
       if (inputValue) setIsOpen(true);
    };
-   const handleInputBlur = (e: any) => {
+   const handleInputBlur = (e: React.PointerEvent) => {
       if (e.relatedTarget !== foundedContainer.current) setIsOpen(false);
    };
 
-   const handleInputChange = (e: any) => {
-      const value = e.target.value;
+   const handleInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
+      const value = e.currentTarget.value;
       setInputValue(value);
       const founded = filterByName(allPokemons, value);
       setFoundedPokemons(founded);
@@ -34,17 +34,19 @@ export default function SearchBar({}: Props) {
       else setIsOpen(false);
    };
 
-   const fillInput = (e: any) => {
-      const value = e.target.innerText;
+   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      router.push({ pathname: "/", query: { search: inputValue } });
+      setIsOpen(false);
+   };
+
+   const fillInput = (e: React.SyntheticEvent) => {
+      const value = e.currentTarget.textContent!;
+      console.log(value);
       setInputValue(value);
       const founded = filterByName(allPokemons, value);
       setFoundedPokemons(founded);
-      handleSubmit(e);
-   };
-
-   const handleSubmit = (e: any) => {
-      e.preventDefault();
-      router.push({ pathname: "/", query: { search: inputValue } });
+      router.push({ pathname: "/", query: { search: value } });
       setIsOpen(false);
    };
 
