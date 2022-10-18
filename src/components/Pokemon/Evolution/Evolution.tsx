@@ -12,7 +12,9 @@ export default function Evolution({ evolution }: Props) {
    return (
       <SectionContainer>
          <SectionTitle>Evolution</SectionTitle>
-         {!evolution.nextStages && <div>This pokemon does not evolve</div>}
+         {(!evolution.nextStages || !evolution.nextStages.length) && (
+            <div>This pokemon does not evolve</div>
+         )}
 
          <div className="flex items-center justify-center space-x-5">
             <EvolutionCard card={evolution.firstStage} />
