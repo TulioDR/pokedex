@@ -1,16 +1,14 @@
 import PokemonModel from "../Model/PokemonModel";
+import fetchData from "./fetchData";
 import { getEvolutionChain } from "./getEvolutionChain";
+import setPokemonCard from "./setPokemonCard";
 
-const getData = async (url: string) => {
-   const res = await fetch(url);
-   return await res.json();
-};
 const getAbilities = async (abilities: any) => {
    let newArray: any = [];
    for (const item of abilities) {
       newArray.push({
          name: item.ability.name,
-         description: await getData(item.ability.url).then((res) => {
+         description: await fetchData(item.ability.url).then((res) => {
             return res.flavor_text_entries.filter(
                (pok: any) => pok.language.name === "en"
             )[0].flavor_text;
@@ -21,8 +19,10 @@ const getAbilities = async (abilities: any) => {
 };
 
 export async function getPokemonData(mainData: any) {
-   const species = await getData(mainData.species.url);
-   const evolution = await getEvolutionChain(species.evolution_chain);
+   const species = await fetchData(mainData.species.url);
+   const evolution = (await getEvolutionChain(species.evolution_chain)) || {
+      firstStage: setPokemonCard(mainData),
+   };
    const pokemon: PokemonModel = {
       name: mainData.name,
       image: {
@@ -42,14 +42,7 @@ export async function getPokemonData(mainData: any) {
          abilities: await getAbilities(mainData.abilities),
       },
       species: species.egg_groups,
-      evolution: evolution || {
-         firstStage: {
-            id: mainData.id,
-            name: mainData.name,
-            img: mainData.sprites.other["official-artwork"].front_default,
-            types: mainData.types,
-         },
-      },
+      evolution: evolution,
    };
    return { pokemon };
 }

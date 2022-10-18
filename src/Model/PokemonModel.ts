@@ -37,7 +37,7 @@ export interface EvolutionModel {
    firstStage: PokemonCardModel;
    nextStages?: {
       secondStage: PokemonCardModel;
-      thirdStage: PokemonCardModel[];
+      thirdStage?: PokemonCardModel[];
    }[];
 }
 

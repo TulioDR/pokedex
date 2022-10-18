@@ -10,13 +10,10 @@ type Props = {
 };
 
 export default function Evolution({ evolution }: Props) {
-   console.log(evolution);
    return (
       <SectionContainer>
          <SectionTitle>Evolution</SectionTitle>
-         {/* {(!evolution || evolution.length === 1) && (
-            <div>This pokemon does not evolve</div>
-         )} */}
+         {!evolution.nextStages && <div>This pokemon does not evolve</div>}
 
          <div className="flex items-center justify-center space-x-5">
             <EvolutionCard card={evolution.firstStage} />
@@ -25,17 +22,19 @@ export default function Evolution({ evolution }: Props) {
                   <div key={index} className="flex items-center space-x-5">
                      <Arrow />
                      <EvolutionCard card={secPok.secondStage} />
-                     <div className="flex flex-col">
-                        {secPok.thirdStage.map((thirdPok) => (
-                           <div
-                              key={thirdPok.id}
-                              className="flex space-x-5 items-center"
-                           >
-                              <Arrow />
-                              <EvolutionCard card={thirdPok} />
-                           </div>
-                        ))}
-                     </div>
+                     {secPok.thirdStage && (
+                        <div className="flex flex-col">
+                           {secPok.thirdStage.map((thirdPok) => (
+                              <div
+                                 key={thirdPok.id}
+                                 className="flex space-x-5 items-center"
+                              >
+                                 <Arrow />
+                                 <EvolutionCard card={thirdPok} />
+                              </div>
+                           ))}
+                        </div>
+                     )}
                   </div>
                ))}
             </div>

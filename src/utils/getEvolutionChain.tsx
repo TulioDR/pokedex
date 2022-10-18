@@ -1,27 +1,24 @@
+import { EvolutionModel } from "../Model/PokemonModel";
+import fetchData from "./fetchData";
+import setPokemonCard from "./setPokemonCard";
+
 const getData = async (url: string) => {
    const res = await fetch(url);
    return await res.json();
 };
 const getEvolutionStage = async (url: string) => {
    const id = url.substring(42).slice(0, -1); // get the id from the end of the url
-   const data = await getData(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-   return {
-      id: data.id,
-      name: data.name,
-      img: data.sprites.other["official-artwork"].front_default,
-      types: data.types,
-   };
+   const data = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+   return setPokemonCard(data);
 };
 
 export const getEvolutionChain = async (evolutionChain: any) => {
    if (!evolutionChain) return null;
-   const evolution = await getData(evolutionChain.url);
-   const data = evolution.chain;
-   // console.log(data);
-   const stages = {
-      firstStage: await getEvolutionStage(data.species.url),
+   const { chain } = await getData(evolutionChain.url);
+   const stages: EvolutionModel = {
+      firstStage: await getEvolutionStage(chain.species.url),
       nextStages: await Promise.all(
-         data.evolves_to.map(async (pok: any) => {
+         chain.evolves_to.map(async (pok: any) => {
             return {
                secondStage: await getEvolutionStage(pok.species.url),
                thirdStage: await Promise.all(

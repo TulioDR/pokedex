@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
+import fetchData from "../utils/fetchData";
 import filterByName from "../utils/filterByName";
 import { getPokemonsCards } from "../utils/getPokemonsCards";
 import orderPokemons from "../utils/orderPokemons";
@@ -35,8 +36,7 @@ export function PokemonsProvider({ children }: Props) {
    useEffect(() => {
       const getAllPokemons = async () => {
          const url = "https://pokeapi.co/api/v2/pokemon?limit=905";
-         const res = await fetch(url);
-         const data = await res.json();
+         const data = await fetchData(url);
          console.log("all pokemons obtained");
          setAllPokemons(data.results);
          setDisplayedSource(data.results);
