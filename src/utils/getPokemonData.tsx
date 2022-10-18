@@ -1,4 +1,5 @@
 import PokemonModel from "../Model/PokemonModel";
+import { getEvolutionChain } from "./getEvolutionChain";
 
 const getData = async (url: string) => {
    const res = await fetch(url);
@@ -17,28 +18,6 @@ const getAbilities = async (abilities: any) => {
       });
    }
    return await newArray;
-};
-const getID = (str: string) => str.substring(42).slice(0, -1);
-
-const getEvolutionChain = async (evolutionChain: any) => {
-   if (!evolutionChain) return null;
-   const evolution = await getData(evolutionChain.url);
-   const data = evolution.chain;
-   let array = [];
-   const names = [getID(data.species.url)];
-   if (data.evolves_to[0]) {
-      names.push(getID(data.evolves_to[0].species.url));
-      if (data.evolves_to[0].evolves_to[0]) {
-         names.push(getID(data.evolves_to[0].evolves_to[0].species.url));
-      }
-   }
-   for (const id of names) {
-      const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-      const data = await getData(url);
-      // aqui debo meter los valores como en las cartas de index
-      array.push(data);
-   }
-   return array;
 };
 
 export async function getPokemonData(mainData: any) {
@@ -63,7 +42,14 @@ export async function getPokemonData(mainData: any) {
          abilities: await getAbilities(mainData.abilities),
       },
       species: species.egg_groups,
-      evolution: evolution,
+      evolution: evolution || {
+         firstStage: {
+            id: mainData.id,
+            name: mainData.name,
+            img: mainData.sprites.other["official-artwork"].front_default,
+            types: mainData.types,
+         },
+      },
    };
    return { pokemon };
 }

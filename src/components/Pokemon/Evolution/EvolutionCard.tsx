@@ -1,20 +1,17 @@
 import Image from "next/image";
 import React from "react";
+import { PokemonCardModel } from "../../../Model/PokemonModel";
 import CardTypes from "../../Card/CardTypes";
 
 type Props = {
-   card: any;
+   card: PokemonCardModel;
 };
 
 export default function EvolutionCard({ card }: Props) {
    return (
       <div className="w-40 hover:-translate-y-1 duration-200 cursor-pointer">
          <div className="aspect-square w-full relative p-3 rounded-full border-white border-4 shadow-2xl">
-            <Image
-               src={card.sprites.other["official-artwork"].front_default}
-               alt={card.name}
-               layout="fill"
-            />
+            <Image src={card.img} alt={card.name} layout="fill" />
          </div>
          <div className="p-2">
             <div className="text-center mb-2">

@@ -33,6 +33,14 @@ export interface PokemonCardModel {
    }[];
 }
 
+export interface EvolutionModel {
+   firstStage: PokemonCardModel;
+   nextStages?: {
+      secondStage: PokemonCardModel;
+      thirdStage: PokemonCardModel[];
+   }[];
+}
+
 export default interface PokemonModel {
    name: string;
    image: ImageModel;
@@ -41,5 +49,5 @@ export default interface PokemonModel {
    description: string;
    details: DetailsModel;
    species: SpeciesModel;
-   evolution: PokemonCardModel[] | null;
+   evolution: EvolutionModel | null;
 }
