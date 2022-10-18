@@ -5,16 +5,15 @@ import Card from "../containers/Card";
 import { AnimatePresence } from "framer-motion";
 import useAnimationContext from "../context/AnimationContext";
 import SelectedImage from "../components/SelectedImage";
-import usePokemonsContext from "../context/PokemonsContext";
 import Select from "../components/Select/Select";
 import ShuffleBtn from "../components/ShuffleBtn";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 import Loading from "../components/Loading";
+import useDisplayedPokemons from "../hooks/useDisplayedPokemons";
 
 const Home: NextPage = ({}: any) => {
-   const { displayed } = usePokemonsContext();
-
    const { selectedId, setSelectedId } = useAnimationContext();
+   const { displayed, getRandomPokemons, nextPage } = useDisplayedPokemons();
 
    return (
       <>
@@ -25,7 +24,7 @@ const Home: NextPage = ({}: any) => {
          </Head>
          <div className="w-full">
             <div className="grid grid-cols-2 gap-7 mb-7">
-               <ShuffleBtn />
+               <ShuffleBtn onClick={getRandomPokemons} />
                <Select />
             </div>
 
@@ -39,7 +38,7 @@ const Home: NextPage = ({}: any) => {
                ))}
             </div>
 
-            <LoadMoreBtn />
+            <LoadMoreBtn onClick={nextPage} />
             {/* <Loading /> */}
 
             <AnimatePresence>

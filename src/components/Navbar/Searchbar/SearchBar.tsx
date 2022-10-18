@@ -42,7 +42,6 @@ export default function SearchBar({}: Props) {
 
    const fillInput = (e: React.SyntheticEvent) => {
       const value = e.currentTarget.textContent!;
-      console.log(value);
       setInputValue(value);
       const founded = filterByName(allPokemons, value);
       setFoundedPokemons(founded);
