@@ -1,9 +1,9 @@
 import React from "react";
 
 type Props = {
-   onChange: (e: any) => void;
+   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
    onFocus: () => void;
-   onBlur: (e: any) => void;
+   onBlur: (e: React.FocusEvent) => void;
    value: string;
 };
 

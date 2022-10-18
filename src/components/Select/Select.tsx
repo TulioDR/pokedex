@@ -21,7 +21,7 @@ export default function Select({}: Props) {
    }, [router.query.order]);
 
    const optionsContainer = useRef<HTMLUListElement>(null);
-   const handleBlur = (e: any) => {
+   const handleBlur = (e: React.FocusEvent) => {
       if (e.relatedTarget !== optionsContainer.current) setIsOpen(false);
    };
 

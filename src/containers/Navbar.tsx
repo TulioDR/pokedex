@@ -23,7 +23,7 @@ export default function Navbar({}: Props) {
                {showTitle ? (
                   <div className="text-2xl">Pokedex</div>
                ) : (
-                  <div className="text-2xl" onClick={goBack}>
+                  <div className="text-xl" onClick={goBack}>
                      Go back
                   </div>
                )}

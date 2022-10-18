@@ -21,11 +21,11 @@ export default function SearchBar({}: Props) {
    const handleInputFocus = () => {
       if (inputValue) setIsOpen(true);
    };
-   const handleInputBlur = (e: React.PointerEvent) => {
+   const handleInputBlur = (e: React.FocusEvent) => {
       if (e.relatedTarget !== foundedContainer.current) setIsOpen(false);
    };
 
-   const handleInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
+   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
       const value = e.currentTarget.value;
       setInputValue(value);
       const founded = filterByName(allPokemons, value);

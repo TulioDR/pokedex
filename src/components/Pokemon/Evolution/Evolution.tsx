@@ -13,7 +13,7 @@ export default function Evolution({ evolution }: Props) {
       <SectionContainer>
          <SectionTitle>Evolution</SectionTitle>
          {(!evolution.nextStages || !evolution.nextStages.length) && (
-            <div>This pokemon does not evolve</div>
+            <div>This pokemon does not evolve.</div>
          )}
 
          <div className="flex items-center justify-center space-x-5">
