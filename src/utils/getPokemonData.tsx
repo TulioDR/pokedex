@@ -3,19 +3,23 @@ import fetchData from "./fetchData";
 import { getEvolutionChain } from "./getEvolutionChain";
 import setPokemonCard from "./setPokemonCard";
 
-const getAbilities = async (abilities: any) => {
-   let newArray: any = [];
-   for (const item of abilities) {
-      newArray.push({
-         name: item.ability.name,
-         description: await fetchData(item.ability.url).then((res) => {
-            return res.flavor_text_entries.filter(
-               (pok: any) => pok.language.name === "en"
-            )[0].flavor_text;
-         }),
-      });
-   }
-   return await newArray;
+interface abilitiesModel {
+   name: string;
+   description: string;
+}
+
+const getAbilities = async (abilities: any[]) => {
+   const abilitiesArray: abilitiesModel[] = await Promise.all(
+      abilities.map(async (ab) => {
+         const name = ab.ability.name;
+         const data = await fetchData(ab.ability.url);
+         const description = data.flavor_text_entries.filter(
+            (pok: any) => pok.language.name === "en"
+         )[0].flavor_text;
+         return { name, description };
+      })
+   );
+   return abilitiesArray;
 };
 
 export async function getPokemonData(mainData: any) {

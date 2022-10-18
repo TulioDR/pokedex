@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { EvolutionModel } from "../../../Model/PokemonModel";
 import SectionContainer from "../Section/SectionContainer";
 import SectionTitle from "../Section/SectionTitle";

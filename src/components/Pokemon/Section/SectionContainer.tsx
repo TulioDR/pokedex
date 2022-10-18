@@ -31,7 +31,7 @@ export default function SectionContainer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3 }}
-            className={`p-5 bg-gradient-to-br ${background} rounded-lg text-white relative`}
+            className={`p-5 bg-gradient-to-br ${background} rounded-lg text-white relative overflow-hidden`}
          >
             {children}
             <ExitCardAnimation />

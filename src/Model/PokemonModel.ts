@@ -15,7 +15,7 @@ export type DetailsModel = {
    abilities: {
       name: string;
       description: string;
-   };
+   }[];
 };
 export type TypesModel = {
    slot: number;
