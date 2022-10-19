@@ -26,7 +26,7 @@ const Home: NextPage = ({}: any) => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <div className="w-full">
-            <div className="grid grid-cols-2 gap-7 mb-7">
+            <div className="grid md:grid-cols-2 gap-5 md:gap-7 mb-7">
                <ShuffleBtn onClick={getRandomPokemons} />
                <Select />
             </div>
