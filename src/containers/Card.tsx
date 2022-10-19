@@ -15,14 +15,7 @@ type Props = {
 
 export default function Card({ pokemon }: Props) {
    const router = useRouter();
-
-   const { setSelectedId, setSelectedImg, setPokemonId } =
-      useAnimationContext();
-
    const execute = () => {
-      setSelectedId(pokemon.img);
-      setSelectedImg(pokemon.img);
-      setPokemonId(pokemon.id);
       router.push(`/${pokemon.id}`, undefined, { scroll: false });
    };
 

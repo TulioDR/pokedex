@@ -2,19 +2,15 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Card from "../containers/Card";
 
-import { AnimatePresence } from "framer-motion";
-import SelectedImage from "../components/SelectedImage";
 import Select from "../components/Select/Select";
 import ShuffleBtn from "../components/ShuffleBtn";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 import DisplayedCardsContainer from "../components/Card/DisplayedCardsContainer";
 
 import useDisplayedPokemons from "../hooks/useDisplayedPokemons";
-import useAnimationContext from "../context/AnimationContext";
 import { useEffect } from "react";
 
 const Home: NextPage = ({}: any) => {
-   const { selectedId } = useAnimationContext();
    const { displayed, getRandomPokemons, nextPage } = useDisplayedPokemons();
 
    useEffect(() => {
@@ -41,8 +37,6 @@ const Home: NextPage = ({}: any) => {
 
             <LoadMoreBtn onClick={nextPage} />
             {/* <Loading /> */}
-
-            {/* <AnimatePresence>{selectedId && <SelectedImage />}</AnimatePresence> */}
          </div>
       </>
    );
