@@ -3,17 +3,23 @@ import Head from "next/head";
 import Card from "../containers/Card";
 
 import { AnimatePresence } from "framer-motion";
-import useAnimationContext from "../context/AnimationContext";
 import SelectedImage from "../components/SelectedImage";
 import Select from "../components/Select/Select";
 import ShuffleBtn from "../components/ShuffleBtn";
 import LoadMoreBtn from "../components/LoadMoreBtn";
-import Loading from "../components/Loading";
+import DisplayedCardsContainer from "../components/Card/DisplayedCardsContainer";
+
 import useDisplayedPokemons from "../hooks/useDisplayedPokemons";
+import useAnimationContext from "../context/AnimationContext";
+import { useEffect } from "react";
 
 const Home: NextPage = ({}: any) => {
-   const { selectedId, setSelectedId } = useAnimationContext();
+   const { selectedId } = useAnimationContext();
    const { displayed, getRandomPokemons, nextPage } = useDisplayedPokemons();
+
+   useEffect(() => {
+      window.scrollTo({ top: 0 });
+   }, []);
 
    return (
       <>
@@ -27,28 +33,16 @@ const Home: NextPage = ({}: any) => {
                <ShuffleBtn onClick={getRandomPokemons} />
                <Select />
             </div>
-
-            <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7 min-h-screen">
+            <DisplayedCardsContainer>
                {displayed.map((pokemon) => (
-                  <Card
-                     setSelectedId={setSelectedId}
-                     pokemon={pokemon}
-                     key={pokemon.id}
-                  />
+                  <Card pokemon={pokemon} key={pokemon.id} />
                ))}
-            </div>
+            </DisplayedCardsContainer>
 
             <LoadMoreBtn onClick={nextPage} />
             {/* <Loading /> */}
 
-            <AnimatePresence>
-               {selectedId && (
-                  <SelectedImage
-                     selectedId={selectedId}
-                     setSelectedId={setSelectedId}
-                  />
-               )}
-            </AnimatePresence>
+            {/* <AnimatePresence>{selectedId && <SelectedImage />}</AnimatePresence> */}
          </div>
       </>
    );

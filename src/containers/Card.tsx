@@ -5,23 +5,23 @@ import { PokemonCardModel } from "../Model/PokemonModel";
 import CardImg from "../components/Card/CardImg";
 import CardTypes from "../components/Card/CardTypes";
 import CardContainer from "../components/Card/CardContainer";
-import ExitCardAnimation from "../animations/ExitCardAnimation";
-import RevealCardAnimation from "../animations/RevealCardAnimation";
+import useAnimationContext from "../context/AnimationContext";
 
 type Props = {
    pokemon: PokemonCardModel;
-   setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export default function Card({ pokemon, setSelectedId }: Props) {
+export default function Card({ pokemon }: Props) {
    const router = useRouter();
 
+   const { setSelectedId, setSelectedImg, setPokemonId } =
+      useAnimationContext();
+
    const execute = () => {
-      // setSelectedId(pokemon.img);
+      setSelectedId(pokemon.img);
+      setSelectedImg(pokemon.img);
+      setPokemonId(pokemon.id);
       router.push(`/${pokemon.id}`, undefined, { scroll: false });
-      // setTimeout(() => {
-      //    setSelectedId(null);
-      // }, 3000);
    };
 
    return (
@@ -36,8 +36,6 @@ export default function Card({ pokemon, setSelectedId }: Props) {
                <CardTypes types={pokemon.types} />
             </div>
          </div>
-         <ExitCardAnimation />
-         <RevealCardAnimation />
       </CardContainer>
    );
 }

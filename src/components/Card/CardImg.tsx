@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import { SpinnerCircularFixed } from "spinners-react";
 
 type Props = {
    img: string;
@@ -10,7 +11,7 @@ type Props = {
 export default function CardImg({ img, alt }: Props) {
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-   const isComplete = () => {
+   const onLoadingComplete = () => {
       setIsLoaded(true);
    };
    return (
@@ -23,10 +24,17 @@ export default function CardImg({ img, alt }: Props) {
             alt={alt}
             layout="fill"
             className="bg-white"
-            onLoadingComplete={isComplete}
+            onLoadingComplete={onLoadingComplete}
          />
          {!isLoaded && (
-            <div className="w-full h-full absolute top-0 left-0 bg-white"></div>
+            <div className="w-full h-full absolute top-0 left-0 bg-white grid place-content-center">
+               <SpinnerCircularFixed
+                  size={70}
+                  thickness={180}
+                  speed={100}
+                  color="#ea580c"
+               />
+            </div>
          )}
       </motion.div>
    );

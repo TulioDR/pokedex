@@ -1,8 +1,3 @@
-export type ImageModel = {
-   smallImg: string;
-   hdImg: string;
-};
-
 export type StatsModel = {
    base_stat: number;
    stat: { name: string };
@@ -43,7 +38,7 @@ export interface EvolutionModel {
 
 export default interface PokemonModel {
    name: string;
-   image: ImageModel;
+   image: string;
    types: TypesModel;
    stats: StatsModel;
    description: string;

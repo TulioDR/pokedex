@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import VerticalAnimation from "../../animations/VerticalAnimation";
 import SelectOption from "./SelectOption";
 
 type Props = {};
@@ -14,7 +15,7 @@ export default function Select({}: Props) {
    const [selected, setSelected] = useState<string>("");
    useEffect(() => {
       const order = router.query.order;
-      if (order === "last-to-first") setSelected("Last to First");
+      if (order === "last-first") setSelected("Last to First");
       else if (order === "a-z") setSelected("A-Z");
       else if (order === "z-a") setSelected("Z-A");
       else setSelected("First to Last");
@@ -32,9 +33,11 @@ export default function Select({}: Props) {
          onClick={toggle}
          className="w-full text-white relative z-10"
       >
-         <button className="w-full h-10 bg-primary rounded-lg flex items-center pl-4 cursor-pointer">
-            {selected}
-         </button>
+         <VerticalAnimation>
+            <button className="w-full h-10 bg-primary rounded-lg flex items-center pl-4 cursor-pointer">
+               {selected}
+            </button>
+         </VerticalAnimation>
          {isOpen && (
             <ul
                tabIndex={0}

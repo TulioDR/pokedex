@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import VerticalAnimation from "../../animations/VerticalAnimation";
 
 type Props = {
    children: React.ReactNode;
@@ -6,16 +6,10 @@ type Props = {
 
 export default function Title({ children }: Props) {
    return (
-      <div className="overflow-hidden mb-5">
-         <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ duration: 0.6 }}
-            className="text-center font-semibold capitalize text-5xl mb-2"
-         >
+      <VerticalAnimation>
+         <div className="text-center font-semibold capitalize text-5xl pb-2 mb-7">
             {children}
-         </motion.div>
-      </div>
+         </div>
+      </VerticalAnimation>
    );
 }

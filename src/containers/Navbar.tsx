@@ -14,7 +14,7 @@ export default function Navbar({}: Props) {
    }, [router.route]);
 
    const goBack = () => {
-      router.push("/");
+      router.push("/", undefined, { scroll: false });
    };
    return (
       <div className="w-full bg-primary text-white sticky top-0 z-30">

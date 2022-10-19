@@ -29,10 +29,7 @@ export async function getPokemonData(mainData: any) {
    };
    const pokemon: PokemonModel = {
       name: mainData.name,
-      image: {
-         smallImg: mainData.sprites.front_default,
-         hdImg: mainData.sprites.other["official-artwork"].front_default,
-      },
+      image: mainData.sprites.other["official-artwork"].front_default,
       stats: mainData.stats,
       types: mainData.types,
       description: species.flavor_text_entries.filter(

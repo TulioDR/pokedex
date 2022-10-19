@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import ExitCardAnimation from "../../../animations/ExitCardAnimation";
-import RevealCardAnimation from "../../../animations/RevealCardAnimation";
+import RenderAnimationContainer from "../../../animations/RenderAnimationContainer";
 
 type Props = {
    children: React.ReactNode;
@@ -26,17 +25,17 @@ export default function SectionContainer({
 
    return (
       <motion.div className={`w-full overflow-hidden`}>
-         <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3 }}
-            className={`p-5 bg-gradient-to-br ${background} rounded-lg text-white relative overflow-hidden`}
-         >
-            {children}
-            <ExitCardAnimation />
-            <RevealCardAnimation />
-         </motion.div>
+         <RenderAnimationContainer>
+            <motion.div
+               initial={{ x: "-100%" }}
+               animate={{ x: 0 }}
+               exit={{ x: "100%" }}
+               transition={{ duration: 0.3 }}
+               className={`p-5 bg-gradient-to-br ${background} rounded-lg text-white relative overflow-hidden`}
+            >
+               {children}
+            </motion.div>
+         </RenderAnimationContainer>
       </motion.div>
    );
 }
