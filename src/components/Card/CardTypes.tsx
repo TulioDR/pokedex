@@ -1,4 +1,3 @@
-import React from "react";
 import { TypesModel } from "../../Model/PokemonModel";
 
 type Props = {
@@ -11,7 +10,7 @@ export default function CardTypes({ types }: Props) {
          {types.map(({ slot, type }) => (
             <div
                key={slot}
-               className={`rounded-md capitalize text-center bg-orange-700 py-1`}
+               className={`rounded-md capitalize bg-fire text-center ${type.name} py-1`}
             >
                {type.name}
             </div>

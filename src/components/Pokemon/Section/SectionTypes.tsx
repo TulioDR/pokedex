@@ -14,7 +14,9 @@ export default function SectionTypes({ types, species }: Props) {
             <div
                key={index}
                className={`rounded-md capitalize py-1 text-center ${
-                  species ? "bg-white text-black" : "bg-blue-500 text-white"
+                  species
+                     ? "bg-white text-black"
+                     : `${type.type.name} text-white`
                }`}
             >
                {species ? type.name : type.type.name}

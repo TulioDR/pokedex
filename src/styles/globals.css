@@ -26,3 +26,58 @@ a {
 * {
    box-sizing: border-box;
 }
+
+.normal {
+   @apply bg-normal;
+}
+.fire {
+   @apply bg-fire;
+}
+.water {
+   @apply bg-water;
+}
+.electric {
+   @apply bg-electric;
+}
+.grass {
+   @apply bg-grass;
+}
+.ice {
+   @apply bg-ice;
+}
+.fighting {
+   @apply bg-fighting;
+}
+.poison {
+   @apply bg-poison;
+}
+.ground {
+   @apply bg-ground;
+}
+.flying {
+   @apply bg-flying;
+}
+.psychic {
+   @apply bg-psychic;
+}
+.bug {
+   @apply bg-bug;
+}
+.rock {
+   @apply bg-rock;
+}
+.ghost {
+   @apply bg-ghost;
+}
+.dragon {
+   @apply bg-dragon;
+}
+.dark {
+   @apply bg-dark;
+}
+.steel {
+   @apply bg-steel;
+}
+.fairy {
+   @apply bg-fairy;
+}
