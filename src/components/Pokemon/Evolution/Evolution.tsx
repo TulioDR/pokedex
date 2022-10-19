@@ -16,11 +16,11 @@ export default function Evolution({ evolution }: Props) {
             <div>This pokemon does not evolve.</div>
          )}
 
-         <div className="flex items-center justify-center space-x-5">
+         <div className="flex items-center justify-center space-x-1">
             <EvolutionCard card={evolution.firstStage} />
-            <div className="flex flex-col space-y-5">
+            <div className="flex flex-col space-y-1">
                {evolution.nextStages?.map((secPok, index) => (
-                  <div key={index} className="flex items-center space-x-5">
+                  <div key={index} className="flex items-center space-x-1">
                      <Arrow />
                      <EvolutionCard card={secPok.secondStage} />
                      {secPok.thirdStage && (
@@ -28,7 +28,7 @@ export default function Evolution({ evolution }: Props) {
                            {secPok.thirdStage.map((thirdPok) => (
                               <div
                                  key={thirdPok.id}
-                                 className="flex space-x-5 items-center"
+                                 className="flex space-x-1 items-center"
                               >
                                  <Arrow />
                                  <EvolutionCard card={thirdPok} />
