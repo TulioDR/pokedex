@@ -18,13 +18,15 @@ export default function Navbar({}: Props) {
    };
    return (
       <NavbarContainer>
-         {showTitle ? (
-            <div className="text-2xl">Pokedex</div>
-         ) : (
-            <div className="text-xl" onClick={goBack}>
-               Go back
-            </div>
-         )}
+         <div className="flex items-center">
+            {showTitle ? (
+               <div className="text-2xl">Pokedex</div>
+            ) : (
+               <div className="text-xl" onClick={goBack}>
+                  Go back
+               </div>
+            )}
+         </div>
          <SearchBar />
       </NavbarContainer>
    );
