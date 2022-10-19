@@ -12,6 +12,7 @@ import { getPokemonData } from "../utils/getPokemonData";
 import { GetServerSidePropsContext } from "next";
 import Title from "../components/Pokemon/Title";
 import PokemonModel from "../Model/PokemonModel";
+import { useRouter } from "next/router";
 
 type Props = {
    url: string;
@@ -20,6 +21,16 @@ type Props = {
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
    const pokemonId = query.pokemon;
    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+   console.log(typeof pokemonId);
+
+   const id = Number(pokemonId);
+
+   if (typeof id !== "number") {
+      return { notFound: true };
+   }
+   if (id < 1 || id > 905) {
+      return { notFound: true };
+   }
    return {
       props: { url },
    };
@@ -27,10 +38,12 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
 
 export default function Pokemon({ url }: Props) {
    const [pokemon, setPokemon] = useState<PokemonModel | null>(null);
+
    useEffect(() => {
       const getPokemon = async () => {
          const res = await fetch(url);
          const data = await res.json();
+         console.log(data);
          const displayedPokemon = await getPokemonData(data);
          setPokemon(displayedPokemon.pokemon);
       };
@@ -61,7 +74,7 @@ export default function Pokemon({ url }: Props) {
                   </div>
                   <Stats stats={pokemon.stats} />
                   <div className="sm:col-span-2">
-                     <Evolution evolution={pokemon.evolution!} />
+                     <Evolution evolution={pokemon.evolution} />
                   </div>
                </div>
             </>

@@ -15,7 +15,7 @@ export default function DisplayedCardsContainer({ children }: Props) {
       <AnimatePresence mode="wait" onExitComplete={handleExit}>
          <motion.div
             key={router.asPath}
-            className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7 min-h-screen"
+            className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7"
          >
             {children}
          </motion.div>

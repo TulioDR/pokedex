@@ -44,5 +44,5 @@ export default interface PokemonModel {
    description: string;
    details: DetailsModel;
    species: SpeciesModel;
-   evolution: EvolutionModel | null;
+   evolution: EvolutionModel;
 }

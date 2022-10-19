@@ -39,7 +39,6 @@ const Home: NextPage = ({}: any) => {
             {showBtn && (
                <LoadMoreBtn onClick={nextPage} isLoading={isLoading} />
             )}
-            {/* <Loading /> */}
          </div>
       </>
    );

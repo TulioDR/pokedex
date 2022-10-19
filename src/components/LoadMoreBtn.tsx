@@ -22,6 +22,7 @@ export default function LoadMoreBtn({ onClick, isLoading }: Props) {
             <motion.button
                onTap={onClick}
                whileTap={{ scale: 0.9 }}
+               exit={{ opacity: 0, transition: { duration: 0 } }}
                className="rounded-lg bg-tertiary h-full flex items-center px-5 mx-auto text-white shadow-lg"
             >
                Load More
