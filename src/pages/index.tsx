@@ -11,7 +11,8 @@ import useDisplayedPokemons from "../hooks/useDisplayedPokemons";
 import { useEffect } from "react";
 
 const Home: NextPage = ({}: any) => {
-   const { displayed, getRandomPokemons, nextPage } = useDisplayedPokemons();
+   const { displayed, getRandomPokemons, nextPage, showBtn, isLoading } =
+      useDisplayedPokemons();
 
    useEffect(() => {
       window.scrollTo({ top: 0 });
@@ -35,7 +36,9 @@ const Home: NextPage = ({}: any) => {
                ))}
             </DisplayedCardsContainer>
 
-            <LoadMoreBtn onClick={nextPage} />
+            {showBtn && (
+               <LoadMoreBtn onClick={nextPage} isLoading={isLoading} />
+            )}
             {/* <Loading /> */}
          </div>
       </>

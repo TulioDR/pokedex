@@ -14,6 +14,13 @@ export default function useDisplayedPokemons() {
    const [displayed, setDisplayed] = useState<PokemonCardModel[]>([]);
    const [pageCount, setPageCount] = useState<number>(0);
 
+   const [showBtn, setShowBtn] = useState<boolean>(true);
+   const [isLoading, setIsLoading] = useState<boolean>(true);
+   useEffect(() => {
+      if (pageCount + 20 >= displayedSource.length) setShowBtn(false);
+      else setShowBtn(true);
+   }, [pageCount, displayedSource]);
+
    const router = useRouter();
 
    const nextPage = () => {
@@ -22,9 +29,11 @@ export default function useDisplayedPokemons() {
 
    useEffect(() => {
       const displayPokemons = async () => {
+         setIsLoading(true);
          const cards = await getPokemonsCards(displayedSource, pageCount);
          if (pageCount === 0) setDisplayed(cards);
          else setDisplayed((oldCards) => oldCards.concat(cards));
+         setIsLoading(false);
       };
       displayPokemons();
    }, [displayedSource, pageCount]);
@@ -59,5 +68,7 @@ export default function useDisplayedPokemons() {
       displayed,
       getRandomPokemons,
       nextPage,
+      showBtn,
+      isLoading,
    };
 }

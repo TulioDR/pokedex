@@ -18,7 +18,8 @@ type Props = {
 };
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-   const url = `https://pokeapi.co/api/v2/pokemon/${query.pokemon}`;
+   const pokemonId = query.pokemon;
+   const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
    return {
       props: { url },
    };

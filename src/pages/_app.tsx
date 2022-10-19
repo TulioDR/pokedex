@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
          <AnimatePresence mode="wait">
             <motion.div key={router.route} className="w-full bg-black">
                <Container>
-                  <div className="w-full bg-gray-300 p-5 sm:p-7 min-h-screen">
+                  <div className="w-full bg-gray-300 p-5 sm:p-7">
                      <Component {...pageProps} />
                   </div>
                </Container>
