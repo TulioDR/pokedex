@@ -7,12 +7,8 @@ type Props = {
 export default function DisplayedCardsContainer({ children }: Props) {
    const router = useRouter();
 
-   const handleExit = () => {
-      console.log("removed");
-   };
-
    return (
-      <AnimatePresence mode="wait" onExitComplete={handleExit}>
+      <AnimatePresence mode="wait">
          <motion.div
             key={router.asPath}
             className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7"

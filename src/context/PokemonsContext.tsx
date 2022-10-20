@@ -21,7 +21,6 @@ export function PokemonsProvider({ children }: Props) {
       const getAllPokemons = async () => {
          const url = "https://pokeapi.co/api/v2/pokemon?limit=905";
          const data = await fetchData(url);
-         console.log("all pokemons obtained");
          setAllPokemons(data.results);
       };
       getAllPokemons();

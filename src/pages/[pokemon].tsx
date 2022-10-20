@@ -43,7 +43,6 @@ export default function Pokemon({ url }: Props) {
       const getPokemon = async () => {
          const res = await fetch(url);
          const data = await res.json();
-         console.log(data);
          const displayedPokemon = await getPokemonData(data);
          setPokemon(displayedPokemon.pokemon);
       };
