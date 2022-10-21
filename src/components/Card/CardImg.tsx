@@ -25,6 +25,7 @@ export default function CardImg({ img, alt }: Props) {
             layout="fill"
             className="bg-white"
             onLoadingComplete={onLoadingComplete}
+            priority
          />
          {!isLoaded && (
             <div className="w-full h-full absolute top-0 left-0 bg-white grid place-content-center">
