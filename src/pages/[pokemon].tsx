@@ -55,7 +55,12 @@ export default function Pokemon({ url }: Props) {
       <div className="w-full">
          <Head>
             <title>{pokemon?.name.toUpperCase() || "Pokédex"}</title>
-            <meta name="description" content={pokemon?.name.toUpperCase()} />
+            <meta
+               name="description"
+               content={`Learn more about ${
+                  pokemon?.name || "your favorite Pokémon"
+               }!`}
+            />
             <link rel="icon" href="/favicon.ico" />
          </Head>
          {pokemon && (
