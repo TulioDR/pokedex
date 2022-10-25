@@ -34,8 +34,19 @@ export default function Select({}: Props) {
          className="w-full text-white relative z-10"
       >
          <VerticalAnimation>
-            <button className="w-full h-10 bg-primary rounded-lg flex items-center pl-4 cursor-pointer">
-               {selected}
+            <button className="w-full group h-10 bg-primary rounded-lg flex items-center justify-between pl-4 cursor-pointer overflow-hidden">
+               <div>{selected}</div>
+               <div className="group-hover:bg-black h-full w-10 flex items-center">
+                  <div
+                     className={`duration-300 h-full w-full ${
+                        isOpen ? "rotate-180" : ""
+                     }`}
+                  >
+                     <span className="material-icons text-4xl">
+                        expand_more
+                     </span>
+                  </div>
+               </div>
             </button>
          </VerticalAnimation>
          {isOpen && (
