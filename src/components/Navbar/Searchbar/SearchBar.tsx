@@ -1,5 +1,5 @@
-import { Router, useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import usePokemonsContext from "../../../context/PokemonsContext";
 import filterByName from "../../../utils/filterByName";
 import Founded from "./Founded";
@@ -16,20 +16,56 @@ export default function SearchBar({}: Props) {
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const [inputValue, setInputValue] = useState<string>("");
    const [foundedPokemons, setFoundedPokemons] = useState<any[]>([]);
+
+   const [cursor, setCursor] = useState<number>(-1);
+
    const foundedContainer = useRef<HTMLUListElement>(null);
 
+   const handleKey = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      if (!foundedPokemons.length) return;
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+
+      const arrowUp = e.key === "ArrowUp";
+      const number1 = arrowUp ? foundedPokemons.length - 1 : 0;
+      const number2 = arrowUp ? -1 : 1;
+      const conditional = arrowUp
+         ? cursor === 0
+         : cursor === foundedPokemons.length - 1;
+
+      if (conditional) {
+         setCursor(number1);
+         setInputValue(foundedPokemons[number1].name);
+      } else {
+         setCursor((current) => current + number2);
+         setInputValue(foundedPokemons[cursor + number2].name);
+      }
+   };
+
+   useEffect(() => {
+      document.addEventListener("keyup", handleKey);
+      return () => {
+         document.removeEventListener("keyup", handleKey);
+      };
+   });
+
    const handleInputFocus = () => {
+      console.log("handle Focus");
       if (inputValue) setIsOpen(true);
    };
    const handleInputBlur = (e: React.FocusEvent) => {
-      if (e.relatedTarget !== foundedContainer.current) setIsOpen(false);
+      if (e.relatedTarget !== foundedContainer.current) {
+         console.log("handle Blur");
+         setIsOpen(false);
+         setCursor(-1);
+      }
    };
 
    const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
       const value = e.currentTarget.value;
       setInputValue(value);
       const founded = filterByName(allPokemons, value);
-      setFoundedPokemons(founded);
+      setFoundedPokemons(founded.slice(0, 10));
       if (value) setIsOpen(true);
       else setIsOpen(false);
    };
@@ -41,21 +77,25 @@ export default function SearchBar({}: Props) {
    };
 
    const fillInput = (e: React.SyntheticEvent) => {
+      console.log("fill this");
       const value = e.currentTarget.textContent!;
       setInputValue(value);
       const founded = filterByName(allPokemons, value);
-      setFoundedPokemons(founded);
+      setFoundedPokemons(founded.slice(0, 10));
       router.push({ pathname: "/", query: { search: value } });
       setIsOpen(false);
    };
 
    return (
-      <div className="h-10 w-full flex relative">
+      <div
+         tabIndex={0}
+         onBlur={handleInputBlur}
+         className="h-10 w-full flex relative"
+      >
          <form onSubmit={handleSubmit} className="flex space-x-3 w-full">
             <Input
-               onChange={handleInputChange}
                onFocus={handleInputFocus}
-               onBlur={handleInputBlur}
+               onChange={handleInputChange}
                value={inputValue}
             />
             <SubmitBtn />
@@ -63,7 +103,13 @@ export default function SearchBar({}: Props) {
          {isOpen && (
             <FoundedContainer elRef={foundedContainer}>
                {foundedPokemons.map((pokemon, index) => (
-                  <Founded onClick={fillInput} key={index}>
+                  <Founded
+                     key={index}
+                     onClick={fillInput}
+                     cursor={cursor}
+                     setCursor={setCursor}
+                     index={index}
+                  >
                      {pokemon.name}
                   </Founded>
                ))}

@@ -1,15 +1,33 @@
+import { motion } from "framer-motion";
+
 type Props = {
    onClick: (e: any) => void;
-   children: React.ReactNode;
+   children: string;
+   cursor: number;
+   index: number;
+   setCursor: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Founded({ onClick, children }: Props) {
+export default function Founded({
+   onClick,
+   setCursor,
+   cursor,
+   index,
+   children,
+}: Props) {
+   const handleMouseEnter = () => {
+      setCursor(index);
+   };
+
    return (
-      <li
+      <motion.li
          onClick={onClick}
-         className="text-black hover:bg-gray-300 px-5 h-10 cursor-pointer flex items-center capitalize"
+         onHoverStart={handleMouseEnter}
+         className={`text-black px-5 h-10 cursor-pointer flex items-center capitalize ${
+            cursor === index ? "bg-gray-300 selected" : ""
+         }`}
       >
          {children}
-      </li>
+      </motion.li>
    );
 }
