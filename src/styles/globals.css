@@ -28,6 +28,21 @@ a {
    box-sizing: border-box;
 }
 
+/* width */
+body::-webkit-scrollbar {
+   width: 15px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+   @apply bg-primary;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+   @apply bg-gray-300;
+}
+
 .normal {
    @apply bg-normal;
 }
