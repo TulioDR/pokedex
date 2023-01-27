@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PokemonsProvider>
          <Navbar />
          <AnimatePresence mode="wait">
-            <motion.div key={router.route} className="w-full">
+            <motion.div key={router.asPath} className="w-full">
                <Container>
                   <div className="w-full bg-gray-300 p-5 sm:p-7 min-h-screen">
                      <Component {...pageProps} />

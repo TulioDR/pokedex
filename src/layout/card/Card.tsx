@@ -1,13 +1,11 @@
 import { useRouter } from "next/router";
-import threeDigits from "../utils/threeDigits";
-import { PokemonCardModel } from "../Model/PokemonModel";
 
-import CardImg from "../components/Card/CardImg";
-import CardTypes from "../components/Card/CardTypes";
-import CardContainer from "../components/Card/CardContainer";
-import useAnimationContext from "../context/AnimationContext";
-import CardID from "../components/Card/CardID";
-import CardName from "../components/Card/CardName";
+import CardID from "./CardID";
+import CardName from "./CardName";
+import { PokemonCardModel } from "../../Model/PokemonModel";
+import CardImg from "./CardImg";
+import CardTypes from "./CardTypes";
+import CardContainer from "./CardContainer";
 
 type Props = {
    pokemon: PokemonCardModel;

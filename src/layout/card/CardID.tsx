@@ -1,4 +1,3 @@
-import React from "react";
 import threeDigits from "../../utils/threeDigits";
 
 type Props = {
