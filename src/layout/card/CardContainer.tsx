@@ -1,31 +1,50 @@
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
-import RenderAnimationContainer from "../../animations/RenderAnimationContainer";
+import { motion, useAnimation } from "framer-motion";
 
 type Props = {
-   onClick: any;
+   onClick: () => void;
    children: React.ReactNode;
 };
 
 export default function CardContainer({ onClick, children }: Props) {
-   const cardRef = useRef<HTMLDivElement>(null);
-   const isInView = useInView(cardRef);
-   useEffect(() => {
-      if (isInView) console.log("is in view");
-   }, [isInView]);
+   const duration = 0.3;
 
+   const innerCard = {
+      animate: { x: "100%", transition: { duration } },
+   };
+
+   const controls = useAnimation();
+   const onAnimationComplete = () => {
+      controls.start("animate");
+   };
+   // const onAnimationEnd = () => {
+   //    console.log("exited");
+   // };
    return (
       <motion.article
-         ref={cardRef}
-         whileHover={{ y: -8, transition: { duration: 0.3 } }}
+         whileHover={{ y: -8, transition: { duration } }}
          onClick={onClick}
-         className="cursor-pointer relative w-full h-full overflow-hidden"
+         className="cursor-pointer relative w-full overflow-hidden"
       >
-         <RenderAnimationContainer>
-            <motion.div className="flex flex-col relative">
-               {children}
-            </motion.div>
-         </RenderAnimationContainer>
+         <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0, transition: { duration } }}
+            exit={{ x: "100%", transition: { duration, delay: duration } }}
+            onAnimationComplete={onAnimationComplete}
+            className="flex flex-col relative"
+         >
+            <motion.div
+               variants={innerCard}
+               animate={controls}
+               className="top-0 left-0 absolute w-full h-full bg-secondary z-10"
+            ></motion.div>
+            <motion.div
+               initial={{ x: "-100%" }}
+               exit={{ x: 0, transition: { duration } }}
+               // onAnimationComplete={onAnimationEnd}
+               className="top-0 left-0 absolute w-full h-full bg-secondary z-10"
+            ></motion.div>
+            {children}
+         </motion.div>
       </motion.article>
    );
 }

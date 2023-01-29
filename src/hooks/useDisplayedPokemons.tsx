@@ -7,66 +7,57 @@ import { getPokemonsCards } from "../utils/getPokemonsCards";
 import orderPokemons from "../utils/orderPokemons";
 
 export default function useDisplayedPokemons() {
+   const router = useRouter();
    const { allPokemons } = usePokemonsContext();
 
-   const [sourceFirstLast, setSourceFirstLast] = useState<any[]>([]);
    const [displayedSource, setDisplayedSource] = useState<any[]>([]);
    const [displayed, setDisplayed] = useState<PokemonCardModel[]>([]);
    const [pageCount, setPageCount] = useState<number>(0);
 
    const [showBtn, setShowBtn] = useState<boolean>(true);
    const [isLoading, setIsLoading] = useState<boolean>(true);
-   useEffect(() => {
-      if (pageCount + 20 >= displayedSource.length) setShowBtn(false);
-      else setShowBtn(true);
-   }, [pageCount, displayedSource]);
-
-   const router = useRouter();
 
    const nextPage = () => {
       setPageCount((pageCount) => pageCount + 20);
    };
 
    useEffect(() => {
-      const displayPokemons = async () => {
-         setIsLoading(true);
-         const cards = await getPokemonsCards(displayedSource, pageCount);
-         if (pageCount === 0) setDisplayed(cards);
-         else setDisplayed((oldCards) => oldCards.concat(cards));
-         setIsLoading(false);
-      };
-      displayPokemons();
-   }, [displayedSource, pageCount]);
-
-   useEffect(() => {
+      if (!allPokemons.length) return;
       const foundedPokemons = filterByName(
          allPokemons,
          router.query.search as string
       );
-      setSourceFirstLast(foundedPokemons);
-      setPageCount(0);
-   }, [router.query.search, allPokemons]);
-
-   useEffect(() => {
       const orderedPokemons = orderPokemons(
-         sourceFirstLast,
+         foundedPokemons,
          router.query.order as string
       );
       setDisplayedSource(orderedPokemons);
-      setPageCount(0);
-   }, [router.query.order, sourceFirstLast]);
+   }, [allPokemons]);
 
-   const getRandomPokemons = () => {
-      const random = [...allPokemons].sort(() => Math.random() - 0.5);
-      setSourceFirstLast(allPokemons);
-      setDisplayedSource(random);
-      router.push({ query: {} });
-      setPageCount(0);
-   };
+   useEffect(() => {
+      const displayPokemons = async () => {
+         if (!allPokemons.length) return;
+         if (!displayedSource.length) return;
+         setIsLoading(true);
+         try {
+            const cards = await getPokemonsCards(displayedSource, pageCount);
+            if (pageCount === 0) setDisplayed(cards);
+            else setDisplayed((oldCards) => oldCards.concat(cards));
+            setIsLoading(false);
+         } catch (err) {
+            console.log(err);
+         }
+      };
+      displayPokemons();
+   }, [allPokemons, displayedSource, pageCount]);
+
+   useEffect(() => {
+      if (pageCount + 20 >= displayedSource.length) setShowBtn(false);
+      else setShowBtn(true);
+   }, [pageCount, displayedSource]);
 
    return {
       displayed,
-      getRandomPokemons,
       nextPage,
       showBtn,
       isLoading,

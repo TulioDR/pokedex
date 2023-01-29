@@ -1,20 +1,20 @@
+import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
-
+import { useRouter } from "next/router";
+import { useState } from "react";
 import Select from "../components/Select/Select";
 import ShuffleBtn from "../components/ShuffleBtn";
-import LoadMoreBtn from "../components/LoadMoreBtn";
-
-import useDisplayedPokemons from "../hooks/useDisplayedPokemons";
-import Card from "../layout/card/Card";
+import Cards from "../containers/Cards";
 
 const Home: NextPage = () => {
-   const { displayed, getRandomPokemons, nextPage, showBtn, isLoading } =
-      useDisplayedPokemons();
-
-   // useEffect(() => {
-   //    window.scrollTo({ top: 0 });
-   // }, []);
+   const router = useRouter();
+   const [refreshRandom, setRefreshRandom] = useState<boolean>(false);
+   const refreshRandomize = () => setRefreshRandom(!refreshRandom);
+   const randomize = () => {
+      if (router.asPath === "/?order=random") refreshRandomize();
+      else router.push("/?order=random");
+   };
 
    return (
       <>
@@ -26,19 +26,16 @@ const Home: NextPage = () => {
             />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <div className="w-full">
+         <div>
             <div className="grid md:grid-cols-2 gap-5 md:gap-7 mb-7">
-               <ShuffleBtn onClick={getRandomPokemons} />
+               <ShuffleBtn onClick={randomize} />
                <Select />
             </div>
-            <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7">
-               {displayed.map((pokemon) => (
-                  <Card pokemon={pokemon} key={pokemon.id} />
-               ))}
-            </div>
-            {showBtn && (
-               <LoadMoreBtn onClick={nextPage} isLoading={isLoading} />
-            )}
+            <AnimatePresence mode="wait">
+               <motion.div key={`${router.asPath}${refreshRandom}`}>
+                  <Cards />
+               </motion.div>
+            </AnimatePresence>
          </div>
       </>
    );

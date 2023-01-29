@@ -1,9 +1,9 @@
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import BackBtn from "../components/Navbar/BackBtn";
-import NavbarContainer from "../components/Navbar/NavbarContainer";
-import SearchBar from "../components/Navbar/Searchbar/SearchBar";
+import BackBtn from "./BackBtn";
+import NavbarContainer from "./NavbarContainer";
+import SearchBar from "./Searchbar/SearchBar";
 
 type Props = {};
 

@@ -72,7 +72,11 @@ export default function SearchBar({}: Props) {
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      router.push({ pathname: "/", query: { search: inputValue } });
+      if (inputValue) {
+         router.push({ pathname: "/", query: { search: inputValue } });
+      } else {
+         router.push("/");
+      }
       setIsOpen(false);
    };
 

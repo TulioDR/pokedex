@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import fetchData from "../utils/fetchData";
 
 interface AppContextInterface {
    allPokemons: any[];
@@ -20,7 +19,8 @@ export function PokemonsProvider({ children }: Props) {
    useEffect(() => {
       const getAllPokemons = async () => {
          const url = "https://pokeapi.co/api/v2/pokemon?limit=905";
-         const data = await fetchData(url);
+         const res = await fetch(url);
+         const data = await res.json();
          setAllPokemons(data.results);
       };
       getAllPokemons();
