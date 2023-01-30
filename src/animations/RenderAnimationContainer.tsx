@@ -1,42 +1,39 @@
-import { motion } from "framer-motion";
-import RenderAnimation from "./RenderAnimation";
+import { motion, useAnimation } from "framer-motion";
 
 type Props = {
    children: React.ReactNode;
 };
 
 export default function RenderAnimationContainer({ children }: Props) {
-   const containerAnimation = {
-      initial: { x: "-100%" },
-      animate: {
-         x: 0,
-         transition: {
-            duration: 0.2,
-            delayChildren: 0.2,
-            ease: [0.645, 0.045, 0.355, 1],
-         },
-      },
-      exit: {
-         x: "100%",
-         transition: {
-            duration: 0.2,
-            delay: 0.2,
-            ease: [0.645, 0.045, 0.355, 1],
-         },
-      },
+   const duration = 0.3;
+
+   const innerCard = {
+      animate: { x: "100%", transition: { duration } },
+   };
+   const controls = useAnimation();
+   const onAnimationComplete = () => {
+      controls.start("animate");
    };
 
    return (
       <motion.div
-         variants={containerAnimation}
-         initial="initial"
-         animate="animate"
-         exit="exit"
-         className="overflow-hidden"
+         initial={{ x: "-100%" }}
+         animate={{ x: 0, transition: { duration } }}
+         exit={{ x: "100%", transition: { duration, delay: duration } }}
+         onAnimationComplete={onAnimationComplete}
+         className="flex flex-col relative"
       >
+         <motion.div
+            variants={innerCard}
+            animate={controls}
+            className="top-0 left-0 absolute w-full h-full bg-primary z-10"
+         ></motion.div>
+         <motion.div
+            initial={{ x: "-100%" }}
+            exit={{ x: 0, transition: { duration } }}
+            className="top-0 left-0 absolute w-full h-full bg-primary z-10"
+         ></motion.div>
          {children}
-         <RenderAnimation />
-         <RenderAnimation exit />
       </motion.div>
    );
 }

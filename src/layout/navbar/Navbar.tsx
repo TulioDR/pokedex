@@ -16,7 +16,8 @@ export default function Navbar({}: Props) {
    }, [router.route]);
 
    const goBack = () => {
-      router.push("/", undefined, { scroll: false });
+      router.push("/", undefined, { scroll: true });
+      // router.back();
    };
    return (
       <NavbarContainer>

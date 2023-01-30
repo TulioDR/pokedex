@@ -17,7 +17,7 @@ export default function CardImg({ img, alt }: Props) {
    return (
       <motion.div
          layoutId={img}
-         className="shadow-xl rounded-xl overflow-hidden mx-4 -mt-4 aspect-square relative"
+         className="shadow-xl rounded-xl overflow-hidden mx-4 -mt-4 aspect-square relative pointer-events-none"
       >
          <Image
             src={img}
