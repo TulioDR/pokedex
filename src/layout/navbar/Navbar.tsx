@@ -1,8 +1,6 @@
-import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import BackBtn from "./BackBtn";
-import NavbarContainer from "./NavbarContainer";
+import Container from "../../components/Container";
 import SearchBar from "./Searchbar/SearchBar";
 
 type Props = {};
@@ -20,10 +18,13 @@ export default function Navbar({}: Props) {
       // router.back();
    };
    return (
-      <NavbarContainer>
-         <div className="text-3xl font-semibold">Pokédex</div>
-
-         <SearchBar />
-      </NavbarContainer>
+      <div className="w-full text-white sticky top-0 z-30">
+         <Container>
+            <div className="w-full flex items-center justify-between py-4">
+               <div className="text-3xl font-semibold">Pokédex</div>
+               <SearchBar />
+            </div>
+         </Container>
+      </div>
    );
 }

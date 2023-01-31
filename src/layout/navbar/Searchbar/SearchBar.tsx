@@ -5,7 +5,6 @@ import filterByName from "../../../utils/filterByName";
 import Founded from "./Founded";
 import FoundedContainer from "./FoundedContainer";
 import Input from "./Input";
-import SubmitBtn from "./SubmitBtn";
 
 type Props = {};
 
@@ -50,12 +49,10 @@ export default function SearchBar({}: Props) {
    });
 
    const handleInputFocus = () => {
-      console.log("handle Focus");
       if (inputValue) setIsOpen(true);
    };
    const handleInputBlur = (e: React.FocusEvent) => {
       if (e.relatedTarget !== foundedContainer.current) {
-         console.log("handle Blur");
          setIsOpen(false);
          setCursor(-1);
       }
@@ -66,7 +63,7 @@ export default function SearchBar({}: Props) {
       setInputValue(value);
       const founded = filterByName(allPokemons, value);
       setFoundedPokemons(founded.slice(0, 10));
-      if (value) setIsOpen(true);
+      if (value && founded.length) setIsOpen(true);
       else setIsOpen(false);
    };
 
@@ -94,15 +91,18 @@ export default function SearchBar({}: Props) {
       <div
          tabIndex={0}
          onBlur={handleInputBlur}
-         className="h-12 w-80 flex relative"
+         className="h-10 w-80 flex relative bg-white rounded-full"
       >
-         <form onSubmit={handleSubmit} className="flex space-x-3 w-full">
+         <form
+            onSubmit={handleSubmit}
+            className="flex items-center space-x-3 w-full px-5"
+         >
             <Input
                onFocus={handleInputFocus}
                onChange={handleInputChange}
                value={inputValue}
             />
-            <SubmitBtn />
+            <span className="material-icons !text-gray-500">search</span>
          </form>
          {isOpen && (
             <FoundedContainer elRef={foundedContainer}>

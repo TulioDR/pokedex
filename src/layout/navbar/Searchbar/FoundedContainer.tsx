@@ -8,7 +8,7 @@ export default function FoundedContainer({ elRef, children }: Props) {
       <ul
          tabIndex={0}
          ref={elRef}
-         className="absolute w-full top-full left-0 bg-white overflow-y-auto rounded-lg shadow-lg mt-2 py-2"
+         className="absolute w-full top-full left-0 bg-white overflow-y-auto rounded-lg shadow-lg mt-2 py-2 max-h-96"
       >
          {children}
       </ul>

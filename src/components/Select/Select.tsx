@@ -43,7 +43,7 @@ export default function Select({}: Props) {
                ref={optionsContainer}
                className="w-full rounded-lg bg-gradient-to-r from-tertiary to-orange-800 mt-2 absolute top-full shadow-lg pb-3"
             >
-               <div className="w-full h-8 flex items-center px-5 text-sm text-gray-300">
+               <div className="w-full h-8 flex items-center px-5 text-sm text-gray-200">
                   Sort pokémons by...
                </div>
                <SelectOption order="first-last">First to Last</SelectOption>

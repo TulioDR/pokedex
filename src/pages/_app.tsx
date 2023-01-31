@@ -9,11 +9,11 @@ import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }: AppProps) {
    const router = useRouter();
    return (
-      <div className="bg-gradient-to-br from-primary to-gray-900 bg-fixed">
+      <div className="bg-gradient-to-tr from-[#141e30] to-[#243b55] bg-fixed">
          <PokemonsProvider>
             <Navbar />
             <Container>
-               <div className="w-full min-h-screen">
+               <div className="w-full min-h-screen pb-7">
                   <AnimatePresence mode="wait">
                      <motion.div key={router.pathname}>
                         <Component {...pageProps} />

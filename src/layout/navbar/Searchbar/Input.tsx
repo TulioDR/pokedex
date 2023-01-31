@@ -10,7 +10,7 @@ export default function Input({ onChange, onFocus, value }: Props) {
          <input
             type="text"
             placeholder="Search for a Pokémon"
-            className="bg-white text-black text-sm sm:text-base rounded-lg h-full w-full outline-none px-5 capitalize"
+            className="bg-transparent text-black text-sm sm:text-base rounded-lg h-full w-full outline-none pr-5 capitalize placeholder:normal-case"
             onChange={onChange}
             onFocus={onFocus}
             value={value}
