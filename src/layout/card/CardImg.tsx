@@ -17,18 +17,17 @@ export default function CardImg({ img, alt }: Props) {
    return (
       <motion.div
          layoutId={img}
-         className="shadow-xl rounded-xl overflow-hidden mx-4 -mt-4 aspect-square relative pointer-events-none"
+         className="shadow-xl rounded-xl overflow-hidden mx-4 -mt-4 aspect-square relative pointer-events-none bg-white"
       >
          <Image
             src={img}
             alt={alt}
             layout="fill"
-            className="bg-white"
             onLoadingComplete={onLoadingComplete}
             priority
          />
          {!isLoaded && (
-            <div className="w-full h-full absolute top-0 left-0 bg-white grid place-content-center">
+            <div className="w-full h-full absolute top-0 left-0 grid place-content-center">
                <SpinnerCircularFixed
                   size={70}
                   thickness={180}

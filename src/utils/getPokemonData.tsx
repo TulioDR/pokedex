@@ -24,6 +24,7 @@ const getAbilities = async (abilities: any[]) => {
 
 export async function getPokemonData(mainData: any) {
    const species = await fetchData(mainData.species.url);
+   console.log(species.color.name);
    const evolution = (await getEvolutionChain(species.evolution_chain)) || {
       firstStage: setPokemonCard(mainData),
    };

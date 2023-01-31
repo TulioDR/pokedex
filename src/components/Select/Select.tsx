@@ -32,7 +32,7 @@ export default function Select({}: Props) {
          tabIndex={0}
          onBlur={handleBlur}
          onClick={toggle}
-         className="w-full text-white relative z-10"
+         className="w-80 text-white relative z-10"
       >
          <VerticalAnimation>
             <SelectDropDown selected={selected} isOpen={isOpen} />
@@ -41,7 +41,7 @@ export default function Select({}: Props) {
             <ul
                tabIndex={0}
                ref={optionsContainer}
-               className="w-full rounded-lg bg-primary mt-2 absolute top-full shadow-lg pb-3"
+               className="w-full rounded-lg bg-gradient-to-r from-tertiary to-orange-800 mt-2 absolute top-full shadow-lg pb-3"
             >
                <div className="w-full h-8 flex items-center px-5 text-sm text-gray-300">
                   Sort pokémons by...

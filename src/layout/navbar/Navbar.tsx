@@ -21,11 +21,7 @@ export default function Navbar({}: Props) {
    };
    return (
       <NavbarContainer>
-         <AnimatePresence mode="wait">
-            <div key={router.route} className="flex items-center">
-               {showTitle ? <BackBtn /> : <BackBtn back onClick={goBack} />}
-            </div>
-         </AnimatePresence>
+         <div className="text-3xl font-semibold">Pokédex</div>
 
          <SearchBar />
       </NavbarContainer>

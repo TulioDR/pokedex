@@ -10,7 +10,7 @@ export default function CardTypes({ types }: Props) {
          {types.map(({ slot, type }) => (
             <div
                key={slot}
-               className={`rounded-md capitalize bg-fire text-center ${type.name} py-1`}
+               className={`rounded-md capitalize bg-fire text-center ${type.name} py-1 shadow-lg`}
             >
                {type.name}
             </div>

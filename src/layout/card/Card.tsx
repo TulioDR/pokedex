@@ -16,10 +16,12 @@ export default function Card({ pokemon }: Props) {
    const execute = () => {
       router.push(`/${pokemon.id}`, undefined, { scroll: false });
    };
-
+   console.log(pokemon.id, pokemon.species.color.name);
    return (
       <CardContainer onClick={execute}>
-         <div className="w-full bg-primary rounded-lg flex-1 mt-4">
+         <div
+            className={`w-full shadow-xl rounded-xl flex-1 mt-4 ${pokemon.species.color.name}`}
+         >
             <CardImg img={pokemon.img} alt={pokemon.name} />
             <div className="w-ful p-3 text-white">
                <CardID id={pokemon.id} />

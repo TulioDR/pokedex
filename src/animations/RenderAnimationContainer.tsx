@@ -8,7 +8,7 @@ export default function RenderAnimationContainer({ children }: Props) {
    const duration = 0.3;
 
    const innerCard = {
-      animate: { x: "100%", transition: { duration } },
+      animate: { x: "105%", transition: { duration } },
    };
    const controls = useAnimation();
    const onAnimationComplete = () => {
@@ -17,7 +17,7 @@ export default function RenderAnimationContainer({ children }: Props) {
 
    return (
       <motion.div
-         initial={{ x: "-100%" }}
+         initial={{ x: "-110%" }}
          animate={{ x: 0, transition: { duration } }}
          exit={{ x: "100%", transition: { duration, delay: duration } }}
          onAnimationComplete={onAnimationComplete}
@@ -26,12 +26,12 @@ export default function RenderAnimationContainer({ children }: Props) {
          <motion.div
             variants={innerCard}
             animate={controls}
-            className="top-0 left-0 absolute w-full h-full bg-primary z-10"
+            className="top-0 left-0 absolute w-full h-full bg-tertiary z-10"
          ></motion.div>
          <motion.div
-            initial={{ x: "-100%" }}
+            initial={{ x: "-105%" }}
             exit={{ x: 0, transition: { duration } }}
-            className="top-0 left-0 absolute w-full h-full bg-primary z-10"
+            className="top-0 left-0 absolute w-full h-full bg-tertiary z-10"
          ></motion.div>
          {children}
       </motion.div>

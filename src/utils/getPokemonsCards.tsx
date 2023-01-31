@@ -6,6 +6,8 @@ export const getPokemonsCards = async (sourceArray: any[], count: number) => {
    return await Promise.all(
       pokemonsSection.map(async (pokemon) => {
          const pokemonData = await fetchData(pokemon.url);
+         const species = await fetchData(pokemonData.species.url);
+         pokemonData.species = species;
          return setPokemonCard(pokemonData);
       })
    );

@@ -7,9 +7,9 @@ type Props = {
 
 export default function SelectDropDown({ selected, isOpen }: Props) {
    return (
-      <button className="w-full group h-10 bg-primary rounded-lg flex items-center justify-between pl-4 cursor-pointer overflow-hidden">
-         <div>{selected}</div>
-         <div className="group-hover:bg-black h-full w-10">
+      <button className="w-full group h-12 bg-gradient-to-r from-tertiary to-orange-800 rounded-lg flex items-center justify-between pl-4 cursor-pointer overflow-hidden">
+         <div className="text-lg font-medium">{selected}</div>
+         <div className="group-hover:bg-orange-900 h-full aspect-square">
             <div
                className={`duration-300 h-full w-full flex items-center ${
                   isOpen ? "rotate-180" : ""

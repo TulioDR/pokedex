@@ -94,7 +94,7 @@ export default function SearchBar({}: Props) {
       <div
          tabIndex={0}
          onBlur={handleInputBlur}
-         className="h-10 w-full flex relative"
+         className="h-12 w-80 flex relative"
       >
          <form onSubmit={handleSubmit} className="flex space-x-3 w-full">
             <Input

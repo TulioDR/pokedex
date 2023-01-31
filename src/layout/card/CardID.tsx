@@ -8,7 +8,7 @@ type Props = {
 export default function CardID({ id, evolution }: Props) {
    return (
       <div
-         className={`text-sm ${evolution ? "text-gray-700" : "text-gray-400"}`}
+         className={`text-sm ${evolution ? "text-gray-700" : "text-gray-300"}`}
       >
          N.º{threeDigits(id)}
       </div>

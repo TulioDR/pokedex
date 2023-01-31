@@ -26,6 +26,7 @@ export interface PokemonCardModel {
       slot: number;
       type: { name: string };
    }[];
+   species: any;
 }
 
 export interface EvolutionModel {

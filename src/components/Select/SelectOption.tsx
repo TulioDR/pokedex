@@ -26,8 +26,10 @@ export default function SelectOption({ children, order }: Props) {
    return (
       <li
          onClick={handleClick}
-         className={`h-10 flex items-center px-5 hover:bg-gray-600 cursor-pointer ${
-            selected ? "bg-gray-600 pointer-events-none" : ""
+         className={`h-10 flex items-center px-5 cursor-pointer ${
+            selected
+               ? "bg-orange-900 pointer-events-none"
+               : "hover:bg-orange-900"
          }`}
       >
          {children}

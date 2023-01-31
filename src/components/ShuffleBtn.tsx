@@ -11,10 +11,10 @@ export default function ShuffleBtn({ onClick }: Props) {
          <motion.button
             whileTap={{ scale: 0.9 }}
             onTap={onClick}
-            className="w-full h-10 bg-secondary space-x-2 flex items-center justify-center text-white rounded-lg"
+            className="w-80 h-12 bg-gradient-to-r from-secondary to-blue-600 space-x-2 flex items-center justify-center text-white rounded-lg relative"
          >
             <span className="material-icons">shuffle</span>
-            <span className="text-lg">Surprise Me!</span>
+            <span className="text-lg font-medium">Surprise Me!</span>
          </motion.button>
       </VerticalAnimation>
    );
