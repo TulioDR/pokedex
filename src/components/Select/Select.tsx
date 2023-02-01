@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import VerticalAnimation from "../../animations/VerticalAnimation";
 import SelectDropDown from "./SelectDropDown";
 import SelectOption from "./SelectOption";
+import { motion } from "framer-motion";
 
 type Props = {};
 
@@ -28,7 +29,8 @@ export default function Select({}: Props) {
    };
 
    return (
-      <div
+      <motion.div
+         layout
          tabIndex={0}
          onBlur={handleBlur}
          onClick={toggle}
@@ -52,6 +54,6 @@ export default function Select({}: Props) {
                <SelectOption order="z-a">Z-A</SelectOption>
             </ul>
          )}
-      </div>
+      </motion.div>
    );
 }

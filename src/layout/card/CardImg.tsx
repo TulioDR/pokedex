@@ -15,10 +15,7 @@ export default function CardImg({ img, alt }: Props) {
       setIsLoaded(true);
    };
    return (
-      <motion.div
-         layoutId={img}
-         className="shadow-xl rounded-xl overflow-hidden mx-4 -mt-4 aspect-square relative pointer-events-none bg-white"
-      >
+      <motion.div className="shadow-xl rounded-xl overflow-hidden mx-4 -mt-4 aspect-square relative pointer-events-none bg-white">
          <Image
             src={img}
             alt={alt}

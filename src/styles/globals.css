@@ -16,6 +16,8 @@ body {
    margin: 0;
    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+   @apply bg-gradient-to-tr from-[#141e30] to-[#243b55]
+      bg-fixed;
 }
 
 a {
