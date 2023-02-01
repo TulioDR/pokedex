@@ -12,12 +12,7 @@ type Props = {
 
 export default function FavoriteCard({ pokemon }: Props) {
    const [id, setId] = useState<string | undefined>(pokemon.name);
-   useEffect(() => {
-      setTimeout(() => {
-         setId(undefined);
-         console.log("change layout id to null");
-      }, 2000);
-   }, []);
+   useEffect(() => {}, []);
    return (
       <motion.div
          layoutId={id}
